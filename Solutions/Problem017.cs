@@ -14,7 +14,7 @@
 	public class Problem017 : Problem
 	{
 		#region Numbers Dictionary
-		private readonly Dictionary<int, string> writtenNumbers = new Dictionary<int, string>
+		private static readonly Dictionary<int, string> writtenNumbers = new Dictionary<int, string>
 				{
 					{ 1000, "thousand" }, 
 					{ 100, "hundred" }, 
@@ -60,7 +60,7 @@
 			return totalLength;
 		}
 
-		private string ConvertToBritishEnglish(int number)
+		private static string ConvertToBritishEnglish(int number)
 		{
 			int[] keys = writtenNumbers.Keys.ToArray();
 			
