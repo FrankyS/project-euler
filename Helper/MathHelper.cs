@@ -12,7 +12,7 @@ namespace ProjectEuler.Helper
 			int[] factorial = { 1 };
 			for (int i = 1; i <= number; i++)
 			{
-				factorial = Mulitply(factorial, i.ToDigitsArray());
+				factorial = Multiply(factorial, i.ToDigitsArray());
 			}
 
 			return factorial;
@@ -110,7 +110,7 @@ namespace ProjectEuler.Helper
 			return isPalindrome;
 		}
 
-		public static int[] Mulitply(int[] first, int[] second)
+		public static int[] Multiply(int[] first, int[] second)
 		{
 			int count = first.Length + second.Length;
 			int[] result = new int[0];

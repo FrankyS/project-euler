@@ -27,7 +27,7 @@
 		[TestCase("15", "3", "45")]
 		public void TestForMultiply(string first, string second, string expectedResult)
 		{
-			int[] result = MathHelper.Mulitply(first.ToDigitsArray(), second.ToDigitsArray());
+			int[] result = MathHelper.Multiply(first.ToDigitsArray(), second.ToDigitsArray());
 
 			Assert.AreEqual(expectedResult, result.ToText());
 		}
