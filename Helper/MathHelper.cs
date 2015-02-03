@@ -58,6 +58,31 @@ namespace ProjectEuler.Helper
 			}
 		}
 
+
+
+		public static IEnumerable<int[]> GetFibonacciAsArray()
+		{
+			int[] first = new int[] { 1 };
+			yield return first;
+
+			int[] second = new int[] { 2 };
+			yield return second;
+
+			while (true)
+			{
+				int[] next = Sum(first, second);
+				first = second;
+				second = next;
+
+				if (next.Length > int.MaxValue)
+				{
+					yield break;
+				}
+
+				yield return next;
+			}
+		}
+
 		public static IEnumerable<long> GetPrimeFactors(long number)
 		{
 			foreach(long primeNumber in GetPrimeNumber())
