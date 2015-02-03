@@ -18,6 +18,23 @@ namespace ProjectEuler.Helper
 			return factorial;
 		}
 
+		public static IEnumerable<long> GetDivisors(long number, bool excludeNumber = false)
+		{
+			yield return 1;
+			for (long divisor = 2; divisor <= number / 2; divisor++)
+			{
+				if (number % divisor == 0)
+				{
+					yield return divisor;
+				}
+			}
+
+			if (!excludeNumber)
+			{
+				yield return number;
+			}
+		}
+
 		public static IEnumerable<long> GetFibonacci()
 		{
 			long first = 1;
