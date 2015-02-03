@@ -1,7 +1,9 @@
 ﻿namespace ProjectEuler.Solutions
 {
+	using System;
 	using System.Linq;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Factorial digit sum.
@@ -16,26 +18,25 @@
 	{
 		public override long Solution()
 		{
-			throw new System.NotImplementedException();
+			int[] factorial = MathHelper.Factorial(100);
+			return factorial.Sum();
 		}
 
-		private static string CalculateFactorial(int number)
+		[TestCase("11", "12", "132")]
+		[TestCase("5", "12", "60")]
+		[TestCase("15", "3", "45")]
+		public void TestForMultiply(string first, string second, string expectedResult)
 		{
-			long factorial = 1;
-			for(int i = 1; i <= number; i++)
-			{
-				factorial *= i;
-			}
+			int[] result = MathHelper.Mulitply(first.ToDigitsArray(), second.ToDigitsArray());
 
-			return factorial.ToString();
+			Assert.AreEqual(expectedResult, result.ToText());
 		}
 
 		[Test]
 		public void TestForExample()
 		{
-			string factorial = CalculateFactorial(10);
-			long sum = factorial.Select(x => int.Parse(x.ToString()))
-				.Sum();
+			int[] factorial = MathHelper.Factorial(10);
+			long sum = factorial.Sum();
 
 			Assert.AreEqual(27, sum);
 		}
@@ -43,7 +44,7 @@
 		[Test]
 		public void TestForProblem()
 		{
-			Assert.AreEqual(0, this.Solution());
+			Assert.AreEqual(648, this.Solution());
 		}
 	}
 }

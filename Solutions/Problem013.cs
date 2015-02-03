@@ -1,8 +1,6 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using System;
-	using System.Collections.Generic;
-	using System.Globalization;
 	using System.Linq;
 	using NUnit.Framework;
 	using ProjectEuler.Helper;
@@ -21,27 +19,19 @@
 				.Select(x => x.ToDigitsArray())
 				.ToArray();
 
-			int carry = 0;
-			List<int> sumsPerDigit = new List<int>();
+			int[] result = MathHelper.Sum(numbers);
+			return long.Parse(result.Take(10)
+				.ToText());
+		}
 
-			const int amountNumbers = 100;
-			const int amountDigits = 50;
-			for (int digit = amountDigits - 1; digit >= 0; digit--)
-			{
-				int sum = carry;
-				for (int number = 0; number < amountNumbers; number++)
-				{
-					sum += numbers[number][digit];
-				}
+		[TestCase("11", "22", "33")]
+		[TestCase("4", "21", "25")]
+		[TestCase("14", "2", "16")]
+		public void TestForSum(string first, string second, string expectedResult)
+		{
+			int[] result = MathHelper.Sum(first.ToDigitsArray(), second.ToDigitsArray());
 
-				sumsPerDigit.Insert(0, sum % 10);
-				carry = sum / 10;
-			}
-
-			string result = carry.ToString(CultureInfo.InvariantCulture);
-			result += string.Join(string.Empty, sumsPerDigit.Take(10 - result.Length));
-			
-			return long.Parse(result);
+			Assert.AreEqual(expectedResult, result.ToText());
 		}
 
 		[Test]

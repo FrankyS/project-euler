@@ -7,6 +7,17 @@ namespace ProjectEuler.Helper
 
 	public static class MathHelper
 	{
+		public static int[] Factorial(int number)
+		{
+			int[] factorial = { 1 };
+			for (int i = 1; i <= number; i++)
+			{
+				factorial = Mulitply(factorial, i.ToDigitsArray());
+			}
+
+			return factorial;
+		}
+
 		public static IEnumerable<long> GetFibonacci()
 		{
 			long first = 1;
@@ -21,7 +32,7 @@ namespace ProjectEuler.Helper
 				first = second;
 				second = next;
 
-				if(next > long.MaxValue)
+				if(next < 0)
 				{
 					yield break;
 				}
@@ -53,7 +64,7 @@ namespace ProjectEuler.Helper
 			yield return 2;
 			for (long number = 3;; number += 2)
 			{
-				if(number > long.MaxValue)
+				if(number < 0)
 				{
 					yield break;
 				}
@@ -82,18 +93,69 @@ namespace ProjectEuler.Helper
 			return isPalindrome;
 		}
 
-		public static bool IsPrimeNumber(long number)
+		public static int[] Mulitply(int[] first, int[] second)
 		{
-			bool isPrime = true;
-			for (int i = 3; i <= Math.Sqrt(number); i += 2)
+			int count = first.Length + second.Length;
+			int[] result = new int[0];
+			for (int f = first.Length - 1; f >= 0; f--)
 			{
-				if (number % i == 0)
+				for (int s = second.Length - 1; s >= 0; s--)
 				{
-					isPrime = false;
+					int[] tmpResult = Enumerable.Repeat(0, count).ToArray();
+					int targetIndex = (f + s) + 1;
+					int value = first[f] * second[s];
+					tmpResult[targetIndex] = value % 10;
+					while ((value /= 10) > 0)
+					{
+						targetIndex--;
+						tmpResult[targetIndex] = value % 10;
+					}
+
+					result = Sum(result, tmpResult);
 				}
 			}
 
-			return isPrime;
+			return result.SkipWhile(x => x == 0).ToArray();
+		}
+
+		public static int[] Sum(params int[][] numbers)
+		{
+			int carry = 0;
+			List<int> sumsPerDigit = new List<int>();
+
+			int amountNumbers = numbers.Length;
+
+			for (int digit = 1; ; digit++)
+			{
+				bool foundDigits = false;
+				int sum = carry;
+				for (int number = 0; number < amountNumbers; number++)
+				{
+					int[] digits = numbers[number];
+					int digitIndex = digits.Length - digit;
+					if (digitIndex >= 0)
+					{
+						foundDigits = true;
+						sum += digits[digitIndex];
+					}
+				}
+
+				if (!foundDigits)
+				{
+					break;
+				}
+
+				sumsPerDigit.Insert(0, sum % 10);
+				carry = sum / 10;
+			}
+
+			while (carry > 0)
+			{
+				sumsPerDigit.Insert(0, carry % 10);
+				carry /= 10;
+			}
+
+			return sumsPerDigit.ToArray();
 		}
 
 		public static long SumMultiples(long upperBound, params long[] divisors)
@@ -108,6 +170,20 @@ namespace ProjectEuler.Helper
 			}
 
 			return sum;
+		}
+
+		private static bool IsPrimeNumber(long number)
+		{
+			bool isPrime = true;
+			for (int i = 3; i <= Math.Sqrt(number); i += 2)
+			{
+				if (number % i == 0)
+				{
+					isPrime = false;
+				}
+			}
+
+			return isPrime;
 		}
 	}
 }
