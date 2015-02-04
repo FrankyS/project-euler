@@ -53,6 +53,32 @@ namespace ProjectEuler.Helper
 				{
 					yield break;
 				}
+
+				yield return next;
+			}
+		}
+
+
+
+		public static IEnumerable<int[]> GetFibonacciAsArray()
+		{
+			int[] first = new int[] { 1 };
+			yield return first;
+
+			int[] second = new int[] { 2 };
+			yield return second;
+
+			while (true)
+			{
+				int[] next = Sum(first, second);
+				first = second;
+				second = next;
+
+				if (next.Length > int.MaxValue)
+				{
+					yield break;
+				}
+
 				yield return next;
 			}
 		}
@@ -85,6 +111,7 @@ namespace ProjectEuler.Helper
 				{
 					yield break;
 				}
+
 				if (IsPrimeNumber(number))
 				{
 					yield return number;
@@ -191,12 +218,23 @@ namespace ProjectEuler.Helper
 
 		private static bool IsPrimeNumber(long number)
 		{
-			bool isPrime = true;
-			for (int i = 3; i <= Math.Sqrt(number); i += 2)
+			bool isPrime = number > 1;
+			if(number > 3)
 			{
-				if (number % i == 0)
+				if(number % 2 == 0 || number % 3 == 0)
 				{
 					isPrime = false;
+				}
+				else
+				{
+					for(long i = 5; i * i <= number; i += 6)
+					{
+						if(number % i == 0 || number % (i + 2) == 0)
+						{
+							isPrime = false;
+							break;
+						}
+					}
 				}
 			}
 
