@@ -10,7 +10,7 @@
 	/// </summary>
 	public class Problem001 : Problem
 	{
-		private readonly long[] divisors = new long[] { 3, 5 };
+		private static readonly long[] divisors = new long[] { 3, 5 };
 
 		public override long Solution()
 		{
