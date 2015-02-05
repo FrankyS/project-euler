@@ -35,13 +35,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\DateTimeHelper.cs" />
@@ -81,6 +74,7 @@
     <Compile Include="Solutions\Problem023.cs" />
     <Compile Include="Solutions\Problem024.cs" />
     <Compile Include="Solutions\Problem025.cs" />
+    <Compile Include="Solutions\Problem026.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
