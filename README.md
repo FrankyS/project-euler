@@ -30,3 +30,6 @@ All timing ares just approximations from one run.
 |   25 |  215 ms |
 |   26 |   26 ms |
 |   27 |   96 ms |
+|   28 |   14 ms |
+|   29 |   15 ms |
+|   30 |   80 ms |

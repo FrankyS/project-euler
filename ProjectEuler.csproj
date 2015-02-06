@@ -78,6 +78,7 @@
     <Compile Include="Solutions\Problem027.cs" />
     <Compile Include="Solutions\Problem028.cs" />
     <Compile Include="Solutions\Problem029.cs" />
+    <Compile Include="Solutions\Problem030.cs" />
     <Compile Include="Timings.cs" />
   </ItemGroup>
   <ItemGroup>
