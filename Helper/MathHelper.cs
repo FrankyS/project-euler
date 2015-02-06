@@ -216,7 +216,7 @@ namespace ProjectEuler.Helper
 			return sum;
 		}
 
-		private static bool IsPrimeNumber(long number)
+		public static bool IsPrimeNumber(long number)
 		{
 			bool isPrime = number > 1;
 			if(number > 3)
