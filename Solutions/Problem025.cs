@@ -1,6 +1,5 @@
 ﻿namespace ProjectEuler.Solutions
 {
-	using System.Collections.Generic;
 	using NUnit.Framework;
 	using ProjectEuler.Helper;
 
@@ -37,7 +36,7 @@
 		[Test]
 		public void TestForExample()
 		{
-			int[] expectedDigits = new int[] { 1, 4, 4 };
+			int[] expectedDigits = new[] { 1, 4, 4 };
 
 			int counter = 1;
 			int[] digits = new int[0];

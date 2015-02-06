@@ -2,7 +2,7 @@
 All timing ares just approximations from one run.
 
 |    # |    Time |
-| ---- | ------- |
+| ---: | ------: |
 |    1 |   14 ms |
 |    2 |    1 ms |
 |    3 |    4 ms |
