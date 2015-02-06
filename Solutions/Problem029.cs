@@ -24,15 +24,15 @@
 			return GetDistinctTerms(2, 100).Count;
 		}
 
-		private static HashSet<string> GetDistinctTerms(int lowerBound, int upperBound)
+		private static HashSet<double> GetDistinctTerms(int lowerBound, int upperBound)
 		{
-			HashSet<string> terms = new HashSet<string>();
+			HashSet<double> terms = new HashSet<double>();
 			for (int a = lowerBound; a <= upperBound; a++)
 			{
 				for (int b = lowerBound; b <= upperBound; b++)
 				{
 					double pow = Math.Pow(a, b);
-					terms.Add(pow.ToString());
+					terms.Add(pow);
 				}
 			}
 
@@ -44,8 +44,7 @@
 		{
 			long[] expectedTerms = new long[] { 4, 8, 9, 16, 25, 27, 32, 64, 81, 125, 243, 256, 625, 1024, 3125 };
 
-			long[] distinctTerms = GetDistinctTerms(2, 5)
-				.Select(x => long.Parse(x))
+			double[] distinctTerms = GetDistinctTerms(2, 5)
 				.OrderBy(x => x)
 				.ToArray();
 
