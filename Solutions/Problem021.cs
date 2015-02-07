@@ -1,9 +1,7 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using System.Collections.Generic;
-	using System.Linq;
 	using NUnit.Framework;
-	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Amicable numbers.
@@ -18,21 +16,25 @@
 	{
 		public override long Solution()
 		{
-			long[] amicableNumbers = GetAmicableNumbers(10000);
-			return amicableNumbers.Sum();
+			ICollection<long> amicableNumbers = GetAmicableNumbers(10000);
+
+			long sum = 0;
+			foreach(long amicableNumber in amicableNumbers)
+			{
+				sum += amicableNumber;
+			}
+
+			return sum;
 		}
 
-		private static long[] GetAmicableNumbers(long upperBound)
+		private static ICollection<long> GetAmicableNumbers(long upperBound)
 		{
-			HashSet<long> amicableNumbers = new HashSet<long>();
+			ICollection<long> amicableNumbers = new HashSet<long>();
 
 			for (long number = 4; number < upperBound; number++)
 			{
-				long sumOfDivisors = MathHelper.GetDivisors(number, true)
-					.Sum();
-
-				long otherSum = MathHelper.GetDivisors(sumOfDivisors, true)
-					.Sum();
+				long sumOfDivisors = GetSumOfDivisors(number);
+				long otherSum = GetSumOfDivisors(sumOfDivisors);
 
 				if (number != sumOfDivisors && otherSum == number)
 				{
@@ -41,7 +43,21 @@
 				}
 			}
 
-			return amicableNumbers.ToArray();
+			return amicableNumbers;
+		}
+
+		public static long GetSumOfDivisors(long number)
+		{
+			long sum = 1;
+			for (long divisor = 2; divisor <= number / 2; divisor++)
+			{
+				if (number % divisor == 0)
+				{
+					sum += divisor;
+				}
+			}
+
+			return sum;
 		}
 
 		[Test]
@@ -49,7 +65,7 @@
 		{
 			long[] expectedNumbers = { 220, 284 };
 
-			long[] amicableNumbers = GetAmicableNumbers(300);
+			ICollection<long> amicableNumbers = GetAmicableNumbers(300);
 
 			Assert.AreEqual(expectedNumbers, amicableNumbers);
 		}

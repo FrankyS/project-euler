@@ -74,9 +74,11 @@
 					{
 						recurringCycle += decimalPlaces[i];
 						decimalPlaces.RemoveAt(i);
-					} 
+					}
+ 
 					break;
 				}
+
 				remaindersWithIndex.Add(numerator, index);
 				index++;
 
@@ -89,6 +91,7 @@
 
 				numerator = remainder;
 			}
+
 			return recurringCycle;
 		}
 

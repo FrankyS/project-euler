@@ -2,7 +2,6 @@
 {
 	using System.Collections.Generic;
 	using NUnit.Framework;
-	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Counting Sundays.
@@ -39,7 +38,7 @@
 					}
 
 					days += daysPerMonth[month];
-					if (month == 2 && DateTimeHelper.IsLeapYear(year))
+					if (month == 2 && IsLeapYear(year))
 					{
 						days++;
 					}
@@ -47,6 +46,11 @@
 			}
 
 			return amountSundays;
+		}
+
+		private static bool IsLeapYear(int year)
+		{
+			return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
 		}
 
 		[Test]

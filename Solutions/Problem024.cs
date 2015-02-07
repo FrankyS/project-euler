@@ -1,8 +1,6 @@
 ﻿namespace ProjectEuler.Solutions
 {
-	using System;
 	using System.Collections.Generic;
-	using System.Linq;
 	using NUnit.Framework;
 
 	/// <summary>
@@ -18,14 +16,13 @@
 	{
 		public override long Solution()
 		{
-			int[] digits = Enumerable.Range(0, 10)
-				.ToArray();
-			List<string> permutations = GetPermutations(digits, 1000000);
+			byte[] digits = Problem005.GetArray(0, 10);
+			List<string> permutations = this.GetPermutations(digits, 1000000);
 
 			return long.Parse(permutations[999999]);
 		}
 
-		private List<string> GetPermutations(int[] digits, int maxPermutations)
+		private List<string> GetPermutations(byte[] digits, int maxPermutations)
 		{
 			List<string> permutations = new List<string>();
 			for (int i = 0; i < digits.Length; i++)
@@ -37,7 +34,7 @@
 				}
 				else
 				{
-					int[] remainingDigits = GetRemainingDigits(digits, i);
+					byte[] remainingDigits = GetRemainingDigits(digits, i);
 					List<string> subPermutations = this.GetPermutations(remainingDigits, maxPermutations);
 					foreach(string subPermutation in subPermutations)
 					{
@@ -54,9 +51,9 @@
 			return permutations;
 		}
 
-		private static int[] GetRemainingDigits(int[] digits, int indexToRemove)
+		private static byte[] GetRemainingDigits(byte[] digits, int indexToRemove)
 		{
-			int[] remainingDigits = new int[digits.Length - 1];
+			byte[] remainingDigits = new byte[digits.Length - 1];
 			for(int i = 0; i < indexToRemove; i++)
 			{
 				remainingDigits[i] = digits[i];
@@ -73,10 +70,9 @@
 		[Test]
 		public void TestForExample()
 		{
-			string[] expectedResult = new string[] { "012", "021", "102", "120", "201", "210" };
-			int[] digits = Enumerable.Range(0, 3)
-				.ToArray();
-			List<string> result = GetPermutations(digits, 100);
+			string[] expectedResult = new[] { "012", "021", "102", "120", "201", "210" };
+			byte[] digits = Problem005.GetArray(0, 3);
+			List<string> result = this.GetPermutations(digits, 100);
 
 			Assert.AreEqual(expectedResult, result);
 		}

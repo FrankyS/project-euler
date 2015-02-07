@@ -1,7 +1,6 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using System;
-	using System.Linq;
 	using NUnit.Framework;
 	using ProjectEuler.Input;
 
@@ -33,17 +32,25 @@
 		private static string[] SplitAndSortNames(string input)
 		{
 			string[] separator = { "," };
-			string[] names = input.Split(separator, StringSplitOptions.RemoveEmptyEntries)
-				.Select(x => x.Trim('\"'))
-				.OrderBy(x => x)
-				.ToArray();
+			string[] names = input.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+			for(int i = 0; i < names.Length; i++)
+			{
+				names[i] = names[i].Trim('\"');
+			}
+			Array.Sort(names);
 
 			return names;
 		}
 
 		private static long GetNameValue(string name)
 		{
-			return name.Select(x => ((int)x) - 64).Sum();
+			long nameValue = 0;
+			foreach(char c in name)
+			{
+				nameValue += c - 64;
+			}
+
+			return nameValue;
 		}
 
 		[Test]

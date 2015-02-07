@@ -1,7 +1,6 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using System.Collections.Generic;
-	using System.Linq;
 	using NUnit.Framework;
 
 	/// <summary>
@@ -46,7 +45,7 @@
 					{ 2, "two" }, 
 					{ 1, "one" }, 
 				};
-		# endregion
+		#endregion
 
 		public override long Solution()
 		{
@@ -62,7 +61,7 @@
 
 		private static string ConvertToBritishEnglish(int number)
 		{
-			int[] keys = writtenNumbers.Keys.ToArray();
+			IEnumerable<int> keys = GetWrittenNumbersKeys();
 			
 			string text = string.Empty;
 			string separator = string.Empty;
@@ -92,6 +91,14 @@
 			}
 
 			return text;
+		}
+
+		private static IEnumerable<int> GetWrittenNumbersKeys()
+		{
+			int[] keys = new int[writtenNumbers.Keys.Count];
+			writtenNumbers.Keys.CopyTo(keys, 0);
+
+			return keys;
 		}
 
 		[TestCase(342, "three hundred and forty-two")]

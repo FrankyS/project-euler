@@ -37,11 +37,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper\DateTimeHelper.cs" />
-    <Compile Include="Helper\MathHelper.cs" />
-    <Compile Include="Helper\Node.cs" />
-    <Compile Include="Helper\NumberHelper.cs" />
-    <Compile Include="Helper\Point.cs" />
+    <Compile Include="Base\Timings.cs" />
     <Compile Include="Input\Input.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -79,7 +75,6 @@
     <Compile Include="Solutions\Problem028.cs" />
     <Compile Include="Solutions\Problem029.cs" />
     <Compile Include="Solutions\Problem030.cs" />
-    <Compile Include="Timings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -99,6 +94,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Problem022.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Problem008.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Problem011.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

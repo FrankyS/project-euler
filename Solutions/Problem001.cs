@@ -1,7 +1,6 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using NUnit.Framework;
-	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Multiples of 3 and 5.
@@ -10,17 +9,29 @@
 	/// </summary>
 	public class Problem001 : Problem
 	{
-		private static readonly long[] divisors = new long[] { 3, 5 };
-
 		public override long Solution()
 		{
-			return MathHelper.SumMultiples(1000, divisors);
+			return SumMultiples(1000);
+		}
+
+		private static int SumMultiples(int upperBound)
+		{
+			int sum = 0;
+			for (int value = 0; value < upperBound; value++)
+			{
+				if (value % (long)3 == 0 || value % (long)5 == 0)
+				{
+					sum += value;
+				}
+			}
+
+			return sum;
 		}
 
 		[Test]
 		public void TestForExample()
 		{
-			long result = MathHelper.SumMultiples(10, divisors);
+			long result = SumMultiples(10);
 
 			Assert.AreEqual(23, result);
 		}

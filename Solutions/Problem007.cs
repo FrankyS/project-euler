@@ -2,7 +2,6 @@
 {
 	using System.Collections.Generic;
 	using NUnit.Framework;
-	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// 10001st prime.
@@ -15,7 +14,7 @@
 		{
 			long result = 0;
 			int counter = 0;
-			foreach(long primeNumber in MathHelper.GetPrimeNumber())
+			foreach(long primeNumber in Problem003.GetPrimeNumber())
 			{
 				counter++;
 				if(counter == 10001)
@@ -31,13 +30,13 @@
 		[Test]
 		public void TestForExample()
 		{
-			long[] expectedPrimes = new long[] { 2, 3, 5, 7, 11, 13 };
+			byte[] expectedPrimes = new byte[] { 2, 3, 5, 7, 11, 13 };
 
 			List<long> primes = new List<long>();
-			foreach (long prime in MathHelper.GetPrimeNumber())
+			foreach (long prime in Problem003.GetPrimeNumber())
 			{
 				primes.Add(prime);
-				if (primes.Count >= 6)
+				if(primes.Count == 6)
 				{
 					break;
 				}

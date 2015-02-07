@@ -1,7 +1,7 @@
 ﻿namespace ProjectEuler.Solutions
 {
+	using System.Collections.Generic;
 	using NUnit.Framework;
-	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// 1000-digit Fibonacci number.
@@ -21,7 +21,7 @@
 		public override long Solution()
 		{
 			long counter = 1;
-			foreach(int[] fibonacci in MathHelper.GetFibonacciAsArray())
+			foreach (byte[] fibonacci in GetFibonacciAsArray())
 			{
 				counter++;
 				if(fibonacci.Length >= 1000)
@@ -33,14 +33,37 @@
 			return counter;
 		}
 
+		public static IEnumerable<byte[]> GetFibonacciAsArray()
+		{
+			byte[] first = new byte[] { 1 };
+			yield return first;
+
+			byte[] second = new byte[] { 2 };
+			yield return second;
+
+			while (true)
+			{
+				byte[] next = Problem013.Sum(first, second);
+				first = second;
+				second = next;
+
+				if (next.Length > int.MaxValue)
+				{
+					yield break;
+				}
+
+				yield return next;
+			}
+		}
+
 		[Test]
 		public void TestForExample()
 		{
-			int[] expectedDigits = new[] { 1, 4, 4 };
+			byte[] expectedDigits = new byte[] { 1, 4, 4 };
 
 			int counter = 1;
-			int[] digits = new int[0];
-			foreach(int[] fibonacci in MathHelper.GetFibonacciAsArray())
+			byte[] digits = new byte[0];
+			foreach (byte[] fibonacci in GetFibonacciAsArray())
 			{
 				counter++;
 				if(counter == 12)

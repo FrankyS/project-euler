@@ -2,7 +2,6 @@
 {
 	using System.Collections.Generic;
 	using NUnit.Framework;
-	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Even Fibonacci numbers.
@@ -15,13 +14,8 @@
 		public override long Solution()
 		{
 			long sum = 0;
-			foreach(long fibonacci in MathHelper.GetFibonacci())
+			foreach (long fibonacci in GetFibonacci(4000000))
 			{
-				if(fibonacci > 4000000)
-				{
-					break;
-				}
-
 				if(fibonacci % 2 == 0)
 				{
 					sum += fibonacci;
@@ -31,19 +25,38 @@
 			return sum;
 		}
 
+		public static IEnumerable<long> GetFibonacci(long maxValue = long.MaxValue)
+		{
+			long first = 1;
+			yield return first;
+
+			long second = 2;
+			yield return second;
+
+			while (true)
+			{
+				long next = first + second;
+				first = second;
+				second = next;
+
+				if (next < 0 || next > maxValue)
+				{
+					yield break;
+				}
+
+				yield return next;
+			}
+		}
+
 		[Test]
 		public void TestForExample()
 		{
-			long[] expectedFibonaccis = new long[] { 1, 2, 3, 5, 8, 13, 21, 34, 55, 89 };
+			byte[] expectedFibonaccis = new byte[] { 1, 2, 3, 5, 8, 13, 21, 34, 55, 89 };
 
 			List<long> fibonaccis = new List<long>();
-			foreach(long fibonacci in MathHelper.GetFibonacci())
+			foreach(long fibonacci in GetFibonacci(90))
 			{
 				fibonaccis.Add(fibonacci);
-				if(fibonaccis.Count >= 10)
-				{
-					break;
-				}
 			}
 
 			Assert.AreEqual(expectedFibonaccis, fibonaccis);

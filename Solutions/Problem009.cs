@@ -15,13 +15,12 @@
 	{
 		public override long Solution()
 		{
-			Tuple<int, int, int> pythagoreanTriplet = PythagoreanTriplet(1000);
-			return pythagoreanTriplet.Item1 * pythagoreanTriplet.Item2 * pythagoreanTriplet.Item3;
+			return PythagoreanTriplet(1000);
 		}
 
-		private static Tuple<int, int, int> PythagoreanTriplet(int targetSum)
+		private static long PythagoreanTriplet(int targetSum)
 		{
-			Tuple<int, int, int> pythagoreanTriplet = null;
+			long product = 0;
 			for (int a = 1; a < targetSum / 3; a++)
 			{
 				for (int b = a + 1; b < targetSum / 2; b++)
@@ -29,23 +28,22 @@
 					int c = targetSum - b - a;
 					if (Equals(Math.Pow(a, 2) + Math.Pow(b, 2), Math.Pow(c, 2)))
 					{
-						pythagoreanTriplet = new Tuple<int, int, int>(a, b, c);
+						product = a * b * c;
 						a = targetSum;
 						break;
 					}
 				}
 			}
 
-			return pythagoreanTriplet;
+			return product;
 		}
 
 		[Test]
 		public void TestForExample()
 		{
-			Tuple<int, int, int> expectedTriplet = new Tuple<int, int, int>(3, 4, 5);
-			Tuple<int, int, int> pythagoreanTriplet = PythagoreanTriplet(12);
+			long product = PythagoreanTriplet(12);
 
-			Assert.AreEqual(expectedTriplet, pythagoreanTriplet);
+			Assert.AreEqual(60, product);
 		}
 
 		[Test]

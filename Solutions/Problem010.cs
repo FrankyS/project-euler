@@ -1,7 +1,6 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using NUnit.Framework;
-	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Summation of primes.
@@ -18,13 +17,12 @@
 		private static long SumOfPrimes(long upperBound)
 		{
 			long sum = 0;
-			foreach(long primeNumber in MathHelper.GetPrimeNumber())
+			foreach(long primeNumber in Problem003.GetPrimeNumber())
 			{
 				if(primeNumber >= upperBound)
 				{
 					break;
 				}
-
 				sum += primeNumber;
 			}
 

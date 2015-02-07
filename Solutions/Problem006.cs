@@ -1,8 +1,6 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using System;
-	using System.Collections.Generic;
-	using System.Linq;
 	using NUnit.Framework;
 
 	/// <summary>
@@ -21,13 +19,13 @@
 			return SumSquareDifference(100);
 		}
 
-		private static long SumSquareDifference(int upperBound)
+		private static long SumSquareDifference(byte upperBound)
 		{
 			double sumOfSquares = 0;
 			double squareOfSums = 0;
 
-			IEnumerable<int> values = Enumerable.Range(1, upperBound);
-			foreach (int value in values)
+			byte[] values = Problem005.GetArray(1, upperBound);
+			foreach (byte value in values)
 			{
 				sumOfSquares += Math.Pow(value, 2);
 				squareOfSums += value;

@@ -2,9 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Linq;
 	using NUnit.Framework;
-	using ProjectEuler.Helper;
 	using ProjectEuler.Input;
 
 	/// <summary>
@@ -29,20 +27,90 @@
 
 		private static long GetMaximumPath(string input)
 		{
-			int[][] triangle = CreateTriangle(input);
-			Node root = Node.CreateTree(triangle, 0, 0, new Dictionary<Point, Node>());
+			byte[][] triangle = CreateTriangle(input);
+			Node root = Node.CreateTree(triangle);
 
 			return root.Value;
 		}
 
-		private static int[][] CreateTriangle(string input)
+		private static byte[][] CreateTriangle(string input)
 		{
 			string[] rows = input.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-			return rows
-				.Select(x => x.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries)
-					.Select(y => int.Parse(y))
-					.ToArray())
-				.ToArray();
+			byte[][] triangle = new byte[rows.Length][];
+			for(int x = 0; x < rows.Length; x++)
+			{
+				string[] row = rows[x].Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+				triangle[x] = new byte[row.Length];
+				for(int y = 0; y < row.Length; y++)
+				{
+					triangle[x][y] = byte.Parse(row[y]);
+				}
+			}
+
+			return triangle;
+		}
+
+		private class Node
+		{
+			private readonly Node[] children = new Node[2];
+
+			private Node(long value)
+			{
+				this.Value = value;
+			}
+
+			public long Value { get; private set; }
+
+			public static Node CreateTree(byte[][] data, int x = 0, int y = 0, IDictionary<string, Node> knownNodes = null)
+			{
+				if (knownNodes == null)
+				{
+					knownNodes = new Dictionary<string, Node>();
+				}
+
+				string point = x + "|" + y;
+				Node node = knownNodes.ContainsKey(point)
+					? knownNodes[point]
+					: null;
+				if (node == null && x < data.Length && y < data[x].Length)
+				{
+					node = new Node(data[x][y]);
+					node.CreateChildNode(data, x + 1, y, knownNodes);
+					node.CreateChildNode(data, x + 1, y + 1, knownNodes);
+
+					long maxhChildValue = 0;
+					for (int i = 0; i < 2; i++)
+					{
+						Node childNode = node.children[i];
+						if (childNode != null && childNode.Value > maxhChildValue)
+						{
+							maxhChildValue = childNode.Value;
+						}
+					}
+
+					node.Value += maxhChildValue;
+
+					knownNodes.Add(point, node);
+				}
+
+				return node;
+			}
+
+			private void CreateChildNode(byte[][] data, int x, int y, IDictionary<string, Node> knownNodes)
+			{
+				Node childNode = CreateTree(data, x, y, knownNodes);
+				if (childNode != null)
+				{
+					if (this.children[0] == null)
+					{
+						this.children[0] = childNode;
+					}
+					else
+					{
+						this.children[1] = childNode;
+					}
+				}
+			}
 		}
 
 		[Test]

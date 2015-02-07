@@ -1,7 +1,6 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using NUnit.Framework;
-	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Largest palindrome product.
@@ -15,15 +14,15 @@
 			return GetLargestPalindrome(100, 999);
 		}
 
-		private static long GetLargestPalindrome(long lowerBound, long upperBound)
+		private static long GetLargestPalindrome(int lowerBound, int upperBound)
 		{
 			long largestPalindrome = 0;
-			for (long x = lowerBound; x <= upperBound; x++)
+			for (int x = lowerBound; x <= upperBound; x++)
 			{
-				for (long y = lowerBound; y <= upperBound; y++)
+				for (int y = lowerBound; y <= upperBound; y++)
 				{
 					long product = x * y;
-					if (MathHelper.IsPalindrome(product) && product > largestPalindrome)
+					if (IsPalindrome(product) && product > largestPalindrome)
 					{
 						largestPalindrome = product;
 					}
@@ -31,6 +30,24 @@
 			}
 
 			return largestPalindrome;
+		}
+
+		private static bool IsPalindrome(long number)
+		{
+			bool isPalindrome = true;
+
+			string numberString = number.ToString();
+			int length = numberString.Length;
+			for (int i = 0; i < length / 2; i++)
+			{
+				if (numberString[i] != numberString[length - 1 - i])
+				{
+					isPalindrome = false;
+					break;
+				}
+			}
+
+			return isPalindrome;
 		}
 
 		[Test]

@@ -1,4 +1,4 @@
-﻿namespace ProjectEuler
+namespace ProjectEuler.Base
 {
 	using System;
 	using System.Collections.Generic;

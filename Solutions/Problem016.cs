@@ -1,7 +1,6 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using System.Collections.Generic;
-	using System.Linq;
 	using NUnit.Framework;
 
 	/// <summary>
@@ -47,7 +46,13 @@
 				}
 			}
 
-			return digits.Sum();
+			long sum = 0;
+			foreach(int digit in digits)
+			{
+				sum += digit;
+			}
+
+			return sum;
 		}
 
 		[Test]

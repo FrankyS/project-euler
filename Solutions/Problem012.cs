@@ -1,8 +1,7 @@
 ﻿namespace ProjectEuler.Solutions
 {
-	using System.Linq;
+	using System.Collections.Generic;
 	using NUnit.Framework;
-	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Highly divisible triangular number.
@@ -34,14 +33,7 @@
 			for (long i = 1;; i++)
 			{
 				triangleNumber += i;
-				long[] primeFactors = MathHelper.GetPrimeFactors(triangleNumber)
-					.ToArray();
-
-				int amountDivisors = primeFactors
-					.GroupBy(x => x)
-					.Select(x => x.Count() + 1)
-					.Aggregate(1, (total, next) => total * next);
-
+				int amountDivisors = GetAmountDivisors(triangleNumber);
 				if (amountDivisors >= targetAmountDivisors)
 				{
 					break;
@@ -49,6 +41,39 @@
 			}
 
 			return triangleNumber;
+		}
+
+		private static int GetAmountDivisors(long number)
+		{
+			IEnumerator<long> primeFactors = Problem003.GetPrimeFactors(number)
+				.GetEnumerator();
+
+			int amountDivisors = 0;
+			if(primeFactors.MoveNext())
+			{
+				amountDivisors++;
+
+				int amountCurrentFactors = 1;
+				long currentFactor = primeFactors.Current;
+				while(primeFactors.MoveNext())
+				{
+					long primeFactor = primeFactors.Current;
+					if(primeFactor == currentFactor)
+					{
+						amountCurrentFactors++;
+					}
+					else
+					{
+						amountDivisors *= amountCurrentFactors + 1;
+						amountCurrentFactors = 1;
+						currentFactor = primeFactor;
+					}
+				}
+
+				amountDivisors *= amountCurrentFactors + 1;
+			}
+
+			return amountDivisors;
 		}
 
 		[Test]

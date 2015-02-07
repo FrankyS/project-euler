@@ -1,9 +1,7 @@
 namespace ProjectEuler.Solutions
 {
 	using System.Collections.Generic;
-	using System.Linq;
 	using NUnit.Framework;
-	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Non-abundant sums.
@@ -37,7 +35,13 @@ namespace ProjectEuler.Solutions
 				}
 			}
 
-			return unexpressableNumbers.Sum();
+			long sum = 0;
+			foreach(long unexpressableNumber in unexpressableNumbers)
+			{
+				sum += unexpressableNumber;
+			}
+
+			return sum;
 		}
 
 		private static bool CanBeExpressedByAbundant(long number, HashSet<long> abundantNumbers)
@@ -58,7 +62,7 @@ namespace ProjectEuler.Solutions
 
 		private static bool IsAbundant(long number)
 		{
-			long sumOfDivisors = MathHelper.GetDivisors(number, true).Sum();
+			long sumOfDivisors = Problem021.GetSumOfDivisors(number);
 			return sumOfDivisors > number;
 		}
 

@@ -38,9 +38,9 @@
 		{
 			int[,] spiral = new int[size, size];
 			
-			int[][] directions = new int[][]
+			int[][] directions = new[]
 				{
-					new int[] { 1, 0 }, new int[] { 0, 1 }, new int[] { -1, 0 }, new int[] { 0, -1 }
+					new[] { 1, 0 }, new[] { 0, 1 }, new[] { -1, 0 }, new[] { 0, -1 }
 				};
 
 			int directionIndex = 0;

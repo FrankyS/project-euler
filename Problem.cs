@@ -1,4 +1,4 @@
-﻿namespace ProjectEuler
+namespace ProjectEuler
 {
 	using NUnit.Framework;
 

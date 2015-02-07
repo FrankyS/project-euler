@@ -1,9 +1,8 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using System;
-	using System.Linq;
+	using System.Collections.Generic;
 	using NUnit.Framework;
-	using ProjectEuler.Helper;
 	using ProjectEuler.Input;
 
 	/// <summary>
@@ -15,13 +14,62 @@
 	{
 		public override long Solution()
 		{
-			int[][] numbers = Input.Problem013.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
-				.Select(x => x.ToDigitsArray())
-				.ToArray();
+			string[] rows = Input.Problem013.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
-			int[] result = MathHelper.Sum(numbers);
-			return long.Parse(result.Take(10)
-				.ToText());
+			byte[][] numbers = new byte[rows.Length][];
+			for(int i = 0; i < rows.Length; i++)
+			{
+				numbers[i] = Problem008.ToDigitsArray(rows[i]);
+			}
+
+			byte[] result = Sum(numbers);
+			string stringResult = string.Empty;
+			for(int i = 0; i < 10; i++)
+			{
+				stringResult += result[i];
+			}
+
+			return long.Parse(stringResult);
+		}
+
+		public static byte[] Sum(params byte[][] numbers)
+		{
+			int carry = 0;
+			List<byte> sumsPerDigit = new List<byte>();
+
+			int amountNumbers = numbers.Length;
+
+			for (int digit = 1;; digit++)
+			{
+				bool foundDigits = false;
+				int sum = carry;
+				for (byte number = 0; number < amountNumbers; number++)
+				{
+					byte[] digits = numbers[number];
+					int digitIndex = digits.Length - digit;
+					if (digitIndex >= 0)
+					{
+						foundDigits = true;
+						sum += digits[digitIndex];
+					}
+				}
+
+				if (!foundDigits)
+				{
+					break;
+				}
+
+				sumsPerDigit.Insert(0, (byte)(sum % 10));
+				carry = sum / 10;
+			}
+
+			while (carry > 0)
+			{
+				sumsPerDigit.Insert(0, (byte)(carry % 10));
+				carry /= 10;
+			}
+
+			return sumsPerDigit.ToArray();
 		}
 
 		[TestCase("11", "22", "33")]
@@ -29,9 +77,9 @@
 		[TestCase("14", "2", "16")]
 		public void TestForSum(string first, string second, string expectedResult)
 		{
-			int[] result = MathHelper.Sum(first.ToDigitsArray(), second.ToDigitsArray());
+			byte[] result = Sum(Problem008.ToDigitsArray(first), Problem008.ToDigitsArray(second));
 
-			Assert.AreEqual(expectedResult, result.ToText());
+			Assert.AreEqual(expectedResult, string.Join(string.Empty, result));
 		}
 
 		[Test]

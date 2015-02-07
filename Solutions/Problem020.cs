@@ -1,9 +1,6 @@
 ﻿namespace ProjectEuler.Solutions
 {
-	using System;
-	using System.Linq;
 	using NUnit.Framework;
-	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Factorial digit sum.
@@ -18,8 +15,62 @@
 	{
 		public override long Solution()
 		{
-			int[] factorial = MathHelper.Factorial(100);
-			return factorial.Sum();
+			byte[] factorial = Factorial(100);
+			long sum = 0;
+			foreach(byte digit in factorial)
+			{
+				sum += digit;
+			}
+
+			return sum;
+		}
+
+		private static byte[] Factorial(int number)
+		{
+			byte[] factorial = { 1 };
+			for (int i = 1; i <= number; i++)
+			{
+				factorial = Multiply(factorial, Problem008.ToDigitsArray(i.ToString()));
+			}
+
+			return factorial;
+		}
+
+		private static byte[] Multiply(byte[] first, byte[] second)
+		{
+			int count = first.Length + second.Length;
+			byte[] result = new byte[0];
+			for (int f = first.Length - 1; f >= 0; f--)
+			{
+				for (int s = second.Length - 1; s >= 0; s--)
+				{
+					byte[] tmpResult = new byte[count];
+					int targetIndex = (f + s) + 1;
+					int value = first[f] * second[s];
+					tmpResult[targetIndex] = (byte)(value % 10);
+					while ((value /= 10) > 0)
+					{
+						targetIndex--;
+						tmpResult[targetIndex] = (byte)(value % 10);
+					}
+
+					result = Problem013.Sum(result, tmpResult);
+				}
+			}
+
+			int startIndex = 0;
+			while(result[startIndex] == 0)
+			{
+				startIndex++;
+			}
+
+			byte[] cleanedResult = new byte[result.Length - startIndex];
+			for(int i = 0; i < cleanedResult.Length; i++)
+			{
+				cleanedResult[i] = result[i + startIndex];
+			}
+
+			return cleanedResult;
 		}
 
 		[TestCase("11", "12", "132")]
@@ -27,18 +78,18 @@
 		[TestCase("15", "3", "45")]
 		public void TestForMultiply(string first, string second, string expectedResult)
 		{
-			int[] result = MathHelper.Multiply(first.ToDigitsArray(), second.ToDigitsArray());
+			byte[] result = Multiply(Problem008.ToDigitsArray(first), Problem008.ToDigitsArray(second));
 
-			Assert.AreEqual(expectedResult, result.ToText());
+			Assert.AreEqual(expectedResult, string.Join(string.Empty, result));
 		}
 
 		[Test]
 		public void TestForExample()
 		{
-			int[] factorial = MathHelper.Factorial(10);
-			long sum = factorial.Sum();
+			byte[] expectedFactorial = new byte[] { 3, 6, 2, 8, 8, 0, 0 };
+			byte[] factorial = Factorial(10);
 
-			Assert.AreEqual(27, sum);
+			Assert.AreEqual(expectedFactorial, factorial);
 		}
 
 		[Test]

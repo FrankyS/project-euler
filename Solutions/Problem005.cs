@@ -1,6 +1,5 @@
 ﻿namespace ProjectEuler.Solutions
 {
-	using System.Linq;
 	using NUnit.Framework;
 
 	/// <summary>
@@ -12,17 +11,17 @@
 	{
 		public override long Solution()
 		{
-			return GetSmallestNumberDividable(20);
+			return GetSmallestNumberDividableByUpTo(20);
 		}
 
-		private static long GetSmallestNumberDividable(int largestDivisor)
+		private static long GetSmallestNumberDividableByUpTo(byte largestDivisor)
 		{
 			long smallestNumber;
 
-			int[] divisors = Enumerable.Range(1, largestDivisor).ToArray();
+			byte[] divisors = GetArray(1, largestDivisor);
 			for (long currentNumber = largestDivisor;; currentNumber += largestDivisor)
 			{
-				if (divisors.All(divisor => currentNumber % divisor == 0))
+				if (AllDivisorsDividable(divisors, currentNumber))
 				{
 					smallestNumber = currentNumber;
 					break;
@@ -32,10 +31,36 @@
 			return smallestNumber;
 		}
 
+		private static bool AllDivisorsDividable(byte[] divisors, long currentNumber)
+		{
+			for(byte i = 0; i < divisors.Length; i++)
+			{
+				byte divisor = divisors[i];
+				if(!(currentNumber % divisor == 0))
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public static byte[] GetArray(byte start, byte count)
+		{
+			byte[] divisors = new byte[count];
+			for(byte i = 0; i < count; i++)
+			{
+				divisors[i] = start;
+				start++;
+			}
+
+			return divisors;
+		}
+
 		[Test]
 		public void TestForExample()
 		{
-			long result = GetSmallestNumberDividable(10);
+			long result = GetSmallestNumberDividableByUpTo(10);
 
 			Assert.AreEqual(2520, result);
 		}
