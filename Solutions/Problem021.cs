@@ -1,5 +1,6 @@
 ﻿namespace ProjectEuler.Solutions
 {
+	using System;
 	using System.Collections.Generic;
 	using NUnit.Framework;
 
@@ -49,11 +50,16 @@
 		public static long GetSumOfDivisors(long number)
 		{
 			long sum = 1;
-			for (long divisor = 2; divisor <= number / 2; divisor++)
+			double sqrt = Math.Sqrt(number);
+			for (long divisor = 2; divisor <= sqrt; divisor++)
 			{
 				if (number % divisor == 0)
 				{
 					sum += divisor;
+					if(!sqrt.Equals(divisor))
+					{
+						sum += number / divisor;
+					}
 				}
 			}
 

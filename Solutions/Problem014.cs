@@ -18,23 +18,29 @@
 	{
 		public override long Solution()
 		{
+			IDictionary<long, int> alreadyProcessed = new Dictionary<long, int>();
+
 			int startingNumber = 0;
 			int longestChain = 0;
-			for(int i = 1; i < 1000000; i++)
+			for(int i = 2; i < 1000000; i++)
 			{
-				int chainLength = GetCollatzSequence(i).Count;
-				if(chainLength > longestChain)
+				if(!alreadyProcessed.ContainsKey(i))
 				{
-					longestChain = chainLength;
-					startingNumber = i;
+					int chainLength = GetCollatzLength(i, alreadyProcessed);
+					if(chainLength > longestChain)
+					{
+						longestChain = chainLength;
+						startingNumber = i;
+					}
 				}
 			}
 
 			return startingNumber;
 		}
 
-		private static IList<long> GetCollatzSequence(long start)
+		private static int GetCollatzLength(int start, IDictionary<long, int> alreadyProcessed)
 		{
+			int offset = 0;
 			List<long> sequence = new List<long>
 				{
 					start
@@ -52,19 +58,32 @@
 					number = (number * 3) + 1;
 				}
 
+				if(alreadyProcessed.ContainsKey(number))
+				{
+					offset = alreadyProcessed[number];
+					break;
+				}
+
 				sequence.Add(number);
 			}
 
-			return sequence;
+			int length = sequence.Count;
+			for(int i = 0; i < length; i++)
+			{
+				long value = sequence[i];
+				alreadyProcessed.Add(value, length - i + offset);
+			}
+
+			return length + offset;
 		}
 
 		[Test]
 		public void TestForExample()
 		{
-			long[] expectedSequence = new long[] { 13, 40, 20, 10, 5, 16, 8, 4, 2, 1 };
-			IEnumerable<long> collatzSequence = GetCollatzSequence(13);
+			int[] expectedSequence = new int[] { 13, 40, 20, 10, 5, 16, 8, 4, 2, 1 };
+			long collatzLength = GetCollatzLength(13, new Dictionary<long, int>());
 
-			Assert.AreEqual(expectedSequence, collatzSequence);
+			Assert.AreEqual(expectedSequence.Length, collatzLength);
 		}
 
 		[Test]
