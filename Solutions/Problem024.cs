@@ -1,6 +1,9 @@
 ﻿namespace ProjectEuler.Solutions
 {
+	using System;
 	using System.Collections.Generic;
+	using System.Diagnostics;
+	using System.Text;
 	using NUnit.Framework;
 
 	/// <summary>
@@ -16,65 +19,43 @@
 	{
 		public override long Solution()
 		{
-			byte[] digits = Problem005.GetArray(0, 10);
-			List<string> permutations = this.GetPermutations(digits, 1000000);
+			List<string> permutations = new List<string>();
+			Permutations("0123456789", permutations, 1000000, string.Empty);
 
 			return long.Parse(permutations[999999]);
 		}
 
-		private List<string> GetPermutations(byte[] digits, int maxPermutations)
+		private static void Permutations(string source, ICollection<string> permutations, int maxPermutations, string permutation)
 		{
-			List<string> permutations = new List<string>();
-			for (int i = 0; i < digits.Length; i++)
+			for(int i = 0; i < source.Length; i++)
 			{
-				string permutation = digits[i].ToString();
-				if(digits.Length == 1)
-				{
-					permutations.Add(permutation);
-				}
-				else
-				{
-					byte[] remainingDigits = GetRemainingDigits(digits, i);
-					List<string> subPermutations = this.GetPermutations(remainingDigits, maxPermutations);
-					foreach(string subPermutation in subPermutations)
-					{
-						permutations.Add(permutation + subPermutation);
-					}
-				}
-
-				if(permutations.Count >= maxPermutations)
+				if (permutations.Count >= maxPermutations)
 				{
 					break;
 				}
+
+				string newPermutation = permutation + source[i];
+				string nextSource = source.Remove(i, 1);
+				if(nextSource.Length == 0)
+				{
+					permutations.Add(newPermutation);
+				}
+				else
+				{
+					Permutations(nextSource, permutations, maxPermutations, newPermutation);
+				}
 			}
-
-			return permutations;
-		}
-
-		private static byte[] GetRemainingDigits(byte[] digits, int indexToRemove)
-		{
-			byte[] remainingDigits = new byte[digits.Length - 1];
-			for(int i = 0; i < indexToRemove; i++)
-			{
-				remainingDigits[i] = digits[i];
-			}
-
-			for(int i = indexToRemove; i < remainingDigits.Length; i++)
-			{
-				remainingDigits[i] = digits[i + 1];
-			}
-
-			return remainingDigits;
 		}
 
 		[Test]
 		public void TestForExample()
 		{
 			string[] expectedResult = new[] { "012", "021", "102", "120", "201", "210" };
-			byte[] digits = Problem005.GetArray(0, 3);
-			List<string> result = this.GetPermutations(digits, 100);
 
-			Assert.AreEqual(expectedResult, result);
+			List<string> permutations = new List<string>(6);
+			Permutations("012", permutations, 6, string.Empty);
+			
+			Assert.AreEqual(expectedResult, permutations);
 		}
 
 		[Test]
