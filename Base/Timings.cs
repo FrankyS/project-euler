@@ -3,8 +3,10 @@ namespace ProjectEuler.Base
 	using System;
 	using System.Collections.Generic;
 	using System.Diagnostics;
+	using System.IO;
 	using System.Linq;
 	using System.Reflection;
+	using System.Text;
 	using NUnit.Framework;
 
 	[TestFixture]
@@ -24,6 +26,16 @@ namespace ProjectEuler.Base
 		[Test]
 		public void GetTimingsForAllProblems()
 		{
+			StringBuilder sb = new StringBuilder()
+				.AppendLine("# Project-Euler")
+				.AppendLine("C# Solutions for [Project-Euler](https://projecteuler.net/problems)")
+				.AppendLine()
+				.AppendLine("# Status")
+				.AppendLine("All timings are just from the last run.")
+				.AppendLine()
+				.AppendLine("| # | Time | Solution | ")
+				.AppendLine("| ---: | ---: | --- |");
+			
 			Stopwatch stopwatch = new Stopwatch();
 			foreach(KeyValuePair<Type, MethodInfo> solution in this.solutions)
 			{
@@ -33,17 +45,20 @@ namespace ProjectEuler.Base
 				solution.Value.Invoke(instance, null);
 				stopwatch.Stop();
 
-				this.OutputInfo(solution.Key.Name, stopwatch.ElapsedMilliseconds);
+				sb.AppendLine(CreateInfo(solution.Key.Name, stopwatch.ElapsedMilliseconds));
 				stopwatch.Reset();
 			}
+
+			File.WriteAllText(@"..\..\README.md", sb.ToString());
 		}
 
-		private void OutputInfo(string problemName, long elapsedMilliseconds)
+		private static string CreateInfo(string problemName, long elapsedMilliseconds)
 		{
 			string problemNumber = problemName.Substring(7)
 				.TrimStart('0');
 
-			Console.WriteLine("| {0} | {1} ms |", problemNumber.PadLeft(4), elapsedMilliseconds.ToString().PadLeft(4));
+			return string.Format("| {0} | {1} ms | [Solution](https://github.com/FrankyS/project-euler/blob/master/Solutions/{2}.cs) |", 
+				problemNumber, elapsedMilliseconds, problemName);
 		}
 	}
 }
