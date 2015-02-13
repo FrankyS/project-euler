@@ -24,7 +24,8 @@ namespace ProjectEuler.Solutions
 				for(int multiplier = multiplicand; multiplier < 10000; multiplier++)
 				{
 					int product = multiplicand * multiplier;
-					if(IsPandigital(multiplicand, multiplier, product))
+					string pandigitalProduct = string.Format("{0}{1}{2}", multiplicand, multiplier, product);
+					if(IsPandigital(pandigitalProduct))
 					{
 						pandigitalProducts.Add(product);
 					}
@@ -40,10 +41,9 @@ namespace ProjectEuler.Solutions
 			return sum;
 		}
 
-		private static bool IsPandigital(int multiplicand, int multiplier, int product)
+		public static bool IsPandigital(string pandigitalProduct)
 		{
 			ICollection<char> occuringDigits = new HashSet<char> { '0' };
-			string pandigitalProduct = string.Format("{0}{1}{2}", multiplicand, multiplier, product);
 			foreach (char digit in pandigitalProduct)
 			{
 				if (occuringDigits.Contains(digit))
@@ -62,8 +62,9 @@ namespace ProjectEuler.Solutions
 			const int multiplicand = 39;
 			const int multiplier = 186;
 			const int product = multiplicand * multiplier;
+			string pandigitalProduct = string.Format("{0}{1}{2}", multiplicand, multiplier, product);
 
-			Assert.IsTrue(IsPandigital(multiplicand, multiplier, product));
+			Assert.IsTrue(IsPandigital(pandigitalProduct));
 		}
 
 		[Test]
