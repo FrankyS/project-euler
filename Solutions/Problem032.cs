@@ -1,5 +1,6 @@
 namespace ProjectEuler.Solutions
 {
+	using System;
 	using System.Collections.Generic;
 	using NUnit.Framework;
 
@@ -41,19 +42,24 @@ namespace ProjectEuler.Solutions
 			return sum;
 		}
 
-		public static bool IsPandigital(string pandigitalProduct)
+		public static bool IsPandigital(string pandigitalProduct, int n = 9)
 		{
-			ICollection<char> occuringDigits = new HashSet<char> { '0' };
-			foreach (char digit in pandigitalProduct)
+			bool isPandigital = pandigitalProduct.Length == n;
+			if (isPandigital)
 			{
-				if (occuringDigits.Contains(digit))
+				char[] charArray = pandigitalProduct.ToCharArray();
+				Array.Sort(charArray);
+				for (int i = 0; i < charArray.Length; i++)
 				{
-					return false;
+					int expectedChar = '1' + i;
+					if (charArray[i] != expectedChar)
+					{
+						isPandigital = false;
+					}
 				}
-				occuringDigits.Add(digit);
 			}
 
-			return pandigitalProduct.Length == 9;
+			return isPandigital;
 		}
 
 		[Test]
