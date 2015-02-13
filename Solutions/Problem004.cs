@@ -32,7 +32,7 @@
 			return largestPalindrome;
 		}
 
-		private static bool IsPalindrome(long number)
+		public static bool IsPalindrome(long number)
 		{
 			bool isPalindrome = true;
 
