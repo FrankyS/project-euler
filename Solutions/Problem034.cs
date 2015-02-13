@@ -1,6 +1,5 @@
 ﻿namespace ProjectEuler.Solutions
 {
-	using System;
 	using System.Collections.Generic;
 	using NUnit.Framework;
 
@@ -28,6 +27,7 @@
 						factorialSum += factorialSums[number];
 						break;
 					}
+
 					int digit = (int)number % 10;
 					factorialSum += Factorial(digit);
 

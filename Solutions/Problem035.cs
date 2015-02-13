@@ -35,7 +35,6 @@
 				// Skip numbers that have already been added as a rotation
 				if (!circularPrimes.Contains(primeNumber))
 				{
-
 					// Skip all numbers containing an even digit
 					string primeString = primeNumber.ToString();
 					if(primeNumber > 2)
@@ -56,7 +55,7 @@
 						}
 					}
 				
-					List<long> numbers = new List<long>{ primeNumber };
+					List<long> numbers = new List<long> { primeNumber };
 					long rotatedNumber = primeNumber;
 					for(int i = 1; i < primeString.Length; i++)
 					{
@@ -101,7 +100,6 @@
 				number /= 10;
 			}
 			
-
 			return rotatedNumber;
 		}
 
