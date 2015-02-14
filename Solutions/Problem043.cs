@@ -27,12 +27,9 @@
 			Problem024.Permutations("0123456789", permutations);
 			foreach (string permutation in permutations)
 			{
-				if (Problem032.IsPandigital(permutation, 10, '0'))
+				if (IsSubStringDivisable(permutation))
 				{
-					if (IsSubStringDivisable(permutation))
-					{
-						sum += long.Parse(permutation);
-					}
+					sum += long.Parse(permutation);
 				}
 			}
 
@@ -44,11 +41,11 @@
 			bool isSubStringDivisable = true;
 			for (int i = 0; i < 7; i++)
 			{
-				string substring = numberString.Substring(i + 1, 3);
-				long subNumber = long.Parse(substring);
+				long subNumber = long.Parse(numberString.Substring(i + 1, 3));
 				if (subNumber % divisors[i] != 0)
 				{
 					isSubStringDivisable = false;
+					break;
 				}
 			}
 
