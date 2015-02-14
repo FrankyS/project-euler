@@ -17,12 +17,12 @@
 		public override long Solution()
 		{
 			List<string> permutations = new List<string>();
-			Permutations("0123456789", permutations, 1000000, string.Empty);
+			Permutations("0123456789", permutations, 1000000);
 
 			return long.Parse(permutations[999999]);
 		}
 
-		private static void Permutations(string source, ICollection<string> permutations, int maxPermutations, string permutation)
+		public static void Permutations(string source, ICollection<string> permutations, int maxPermutations = int.MaxValue, string permutation = null)
 		{
 			for(int i = 0; i < source.Length; i++)
 			{
@@ -50,7 +50,7 @@
 			string[] expectedResult = new[] { "012", "021", "102", "120", "201", "210" };
 
 			List<string> permutations = new List<string>(6);
-			Permutations("012", permutations, 6, string.Empty);
+			Permutations("012", permutations);
 			
 			Assert.AreEqual(expectedResult, permutations);
 		}

@@ -42,7 +42,7 @@ namespace ProjectEuler.Solutions
 			return sum;
 		}
 
-		public static bool IsPandigital(string pandigitalProduct, int n = 9)
+		public static bool IsPandigital(string pandigitalProduct, int n = 9, char startChar = '1')
 		{
 			bool isPandigital = pandigitalProduct.Length == n;
 			if (isPandigital)
@@ -51,7 +51,7 @@ namespace ProjectEuler.Solutions
 				Array.Sort(charArray);
 				for (int i = 0; i < charArray.Length; i++)
 				{
-					int expectedChar = '1' + i;
+					int expectedChar = startChar + i;
 					if (charArray[i] != expectedChar)
 					{
 						isPandigital = false;
