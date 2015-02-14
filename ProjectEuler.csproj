@@ -86,6 +86,7 @@
     <Compile Include="Solutions\Problem039.cs" />
     <Compile Include="Solutions\Problem040.cs" />
     <Compile Include="Solutions\Problem041.cs" />
+    <Compile Include="Solutions\Problem042.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -111,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Problem011.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Problem042.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

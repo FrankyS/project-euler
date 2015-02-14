@@ -135,5 +135,14 @@ namespace ProjectEuler.Input {
                 return ResourceManager.GetString("Problem022", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;A&quot;,&quot;ABILITY&quot;,&quot;ABLE&quot;,&quot;ABOUT&quot;,&quot;ABOVE&quot;,&quot;ABSENCE&quot;,&quot;ABSOLUTELY&quot;,&quot;ACADEMIC&quot;,&quot;ACCEPT&quot;,&quot;ACCESS&quot;,&quot;ACCIDENT&quot;,&quot;ACCOMPANY&quot;,&quot;ACCORDING&quot;,&quot;ACCOUNT&quot;,&quot;ACHIEVE&quot;,&quot;ACHIEVEMENT&quot;,&quot;ACID&quot;,&quot;ACQUIRE&quot;,&quot;ACROSS&quot;,&quot;ACT&quot;,&quot;ACTION&quot;,&quot;ACTIVE&quot;,&quot;ACTIVITY&quot;,&quot;ACTUAL&quot;,&quot;ACTUALLY&quot;,&quot;ADD&quot;,&quot;ADDITION&quot;,&quot;ADDITIONAL&quot;,&quot;ADDRESS&quot;,&quot;ADMINISTRATION&quot;,&quot;ADMIT&quot;,&quot;ADOPT&quot;,&quot;ADULT&quot;,&quot;ADVANCE&quot;,&quot;ADVANTAGE&quot;,&quot;ADVICE&quot;,&quot;ADVISE&quot;,&quot;AFFAIR&quot;,&quot;AFFECT&quot;,&quot;AFFORD&quot;,&quot;AFRAID&quot;,&quot;AFTER&quot;,&quot;AFTERNOON&quot;,&quot;AFTERWARDS&quot;,&quot;AGAIN&quot;,&quot;AGAINST&quot;,&quot;AGE&quot;,&quot;AGENCY&quot;,&quot;AGENT&quot;,&quot;AGO&quot;,&quot;AGREE&quot;,&quot;AGREEMENT&quot;,&quot....
+        /// </summary>
+        public static string Problem042 {
+            get {
+                return ResourceManager.GetString("Problem042", resourceCulture);
+            }
+        }
     }
 }

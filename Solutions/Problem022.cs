@@ -22,7 +22,7 @@
 			string[] names = SplitAndSortNames(Input.Problem022);
 			for (int i = 0; i < names.Length; i++)
 			{
-				long nameValue = GetNameValue(names[i]);
+				long nameValue = GetStringValue(names[i]);
 				totalNameScore += nameValue * (i + 1);
 			}
 
@@ -42,9 +42,9 @@
 			return names;
 		}
 
-		private static long GetNameValue(string name)
+		public static int GetStringValue(string name)
 		{
-			long nameValue = 0;
+			int nameValue = 0;
 			foreach(char c in name)
 			{
 				nameValue += c - 64;
@@ -56,7 +56,7 @@
 		[Test]
 		public void NameColinHasValueOf53() 
 		{
-			long value = GetNameValue("COLIN");
+			long value = GetStringValue("COLIN");
 	
 			Assert.AreEqual(53, value);
 		}
