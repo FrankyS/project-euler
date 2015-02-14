@@ -25,7 +25,7 @@
 			return sum;
 		}
 
-		public static IEnumerable<long> GetFibonacci(long maxValue = long.MaxValue)
+		private static IEnumerable<long> GetFibonacci(long maxValue = long.MaxValue)
 		{
 			long first = 1;
 			yield return first;
