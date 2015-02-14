@@ -16,21 +16,12 @@
 			return GetCircularPrimes(1000000).Count;
 		}
 
-		private static ICollection<long> GetCircularPrimes(long upperBound)
+		private static ICollection<int> GetCircularPrimes(int upperBound)
 		{
-			ICollection<long> primes = new HashSet<long>();
-			foreach(long primeNumber in Problem003.GetPrimeNumber())
-			{
-				if (primeNumber >= upperBound)
-				{
-					break;
-				}
+			ICollection<int> primes = new HashSet<int>(Problem010.EratosthenesSieve(upperBound));
 
-				primes.Add(primeNumber);
-			}
-
-			ICollection<long> circularPrimes = new HashSet<long>();
-			foreach(long primeNumber in primes)
+			ICollection<int> circularPrimes = new HashSet<int>();
+			foreach (int primeNumber in primes)
 			{
 				// Skip numbers that have already been added as a rotation
 				if (!circularPrimes.Contains(primeNumber))
@@ -54,9 +45,9 @@
 							continue;
 						}
 					}
-				
-					List<long> numbers = new List<long> { primeNumber };
-					long rotatedNumber = primeNumber;
+
+					List<int> numbers = new List<int> { primeNumber };
+					int rotatedNumber = primeNumber;
 					for(int i = 1; i < primeString.Length; i++)
 					{
 						rotatedNumber = RotateNumber(rotatedNumber);
@@ -69,7 +60,7 @@
 					}
 
 					// Add the number and all its rotations
-					foreach (long number in numbers)
+					foreach (int number in numbers)
 					{
 						circularPrimes.Add(number);
 					}
@@ -79,9 +70,9 @@
 			return circularPrimes;
 		}
 
-		private static long RotateNumber(long number)
+		private static int RotateNumber(int number)
 		{
-			long rotatedNumber = 0;
+			int rotatedNumber = 0;
 
 			int multiplier = 10;
 			while(number > 0)
@@ -92,7 +83,7 @@
 				}
 				else
 				{
-					long digit = number % 10;
+					int digit = number % 10;
 					rotatedNumber += digit * multiplier;
 					multiplier *= 10;
 				}
@@ -113,9 +104,9 @@
 		[Test]
 		public void TestForExampe()
 		{
-			long[] expectedPrimes = new long[] { 2, 3, 5, 7, 11, 13, 31, 17, 71, 37, 73, 79, 97 };
+			int[] expectedPrimes = new int[] { 2, 3, 5, 7, 11, 13, 31, 17, 71, 37, 73, 79, 97 };
 
-			ICollection<long> circularPrimes = GetCircularPrimes(100);
+			ICollection<int> circularPrimes = GetCircularPrimes(100);
 
 			Assert.AreEqual(expectedPrimes, circularPrimes);
 		}
