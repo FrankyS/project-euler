@@ -31,7 +31,7 @@
 		{
 			List<int> primes = new List<int>(upperbound);
 
-			BitArray bitArray = new BitArray(upperbound + 2, true);
+			BitArray bitArray = new BitArray(upperbound + 1, true);
 			for (int i = 2; i * i < upperbound; i++)
 			{
 				if (bitArray.Get(i))
