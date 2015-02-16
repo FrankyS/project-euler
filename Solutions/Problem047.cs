@@ -6,12 +6,12 @@ namespace ProjectEuler.Solutions
 	/// <summary>
 	/// Distinct primes factors.
 	/// The first two consecutive numbers to have two distinct prime factors are:
-	/// <para>14 = 2 × 7</para>
-	/// <para>15 = 3 × 5</para>
+	/// <para>14 = 2 x 7</para>
+	/// <para>15 = 3 x 5</para>
 	/// The first three consecutive numbers to have three distinct prime factors are:
-	/// <para>644 = 2<sup>2</sup> × 7 × 23</para>
-	/// <para>645 = 3 × 5 × 43</para>
-	/// <para>646 = 2 × 17 × 19.</para>
+	/// <para>644 = 2<sup>2</sup> x 7 x 23</para>
+	/// <para>645 = 3 x 5 x 43</para>
+	/// <para>646 = 2 x 17 x 19.</para>
 	/// Find the first four consecutive integers to have four distinct prime factors. What is the first of these numbers?
 	/// </summary>
 	public class Problem047 : Problem

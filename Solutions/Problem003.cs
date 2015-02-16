@@ -23,15 +23,21 @@
 		{
 			foreach (long primeNumber in GetPrimeNumber())
 			{
-				if (number <= 1)
+				if (primeNumber * primeNumber > number)
 				{
-					yield break;
+					yield return number;
+					number = 1;
 				}
 
 				while (number % primeNumber == 0)
 				{
 					number /= primeNumber;
 					yield return primeNumber;
+				}
+
+				if (number == 1)
+				{
+					yield break;
 				}
 			}
 		}
