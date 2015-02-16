@@ -35,19 +35,10 @@
 			return count;
 		}
 
-		private static bool IsTriangleNumber(long wordValue)
+		public static bool IsTriangleNumber(long number)
 		{
-			int number = 0;
-			for (int i = 1; i <= wordValue; i++)
-			{
-				number += i;
-				if(number >= wordValue)
-				{
-					break;
-				}
-			}
-				
-			return number == wordValue;
+			double result = (Math.Sqrt((8 * number) + 1) - 1) / 2;
+			return result.Equals((int)result);
 		}
 
 		[Test]

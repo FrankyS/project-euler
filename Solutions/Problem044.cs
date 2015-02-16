@@ -39,7 +39,7 @@
 			return n * ((3 * n) - 1) / 2;
 		}
 
-		private static bool IsPentagonNumber(int number)
+		public static bool IsPentagonNumber(long number)
 		{
 			double result = (Math.Sqrt((24 * number) + 1) + 1) / 6;
 			return result.Equals((int)result);
