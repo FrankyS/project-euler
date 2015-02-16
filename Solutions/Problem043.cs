@@ -1,6 +1,5 @@
 ﻿namespace ProjectEuler.Solutions
 {
-	using System;
 	using System.Collections.Generic;
 	using NUnit.Framework;
 
@@ -19,14 +18,14 @@
 	/// </summary>
 	public class Problem043 : Problem
 	{
-		private static readonly int[] divisors = new int[] { 17, 13, 11, 7, 5, 3, 2 };
+		private static readonly int[] divisors = new[] { 17, 13, 11, 7, 5, 3, 2 };
 
 		public override long Solution()
 		{
 			long sum = 0;
 
 			List<string> pandigitalNumbers = new List<string>();
-			char[] digits = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+			char[] digits = new[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 			for (int i = 17; i < 1000; i += 17)
 			{
 				string number = i.ToString().PadLeft(3, '0');
