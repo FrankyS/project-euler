@@ -25,8 +25,7 @@ namespace ProjectEuler.Solutions
 
 			const int upperbound = 200000;
 			List<int> primes = Problem010.EratosthenesSieve(upperbound);
-			List<int> nonPrimes = ReversedEratosthenesSieve(upperbound);
-			foreach (int nonPrime in nonPrimes)
+			foreach (int nonPrime in ReversedEratosthenesSieve(upperbound))
 			{
 				if (number > 0)
 				{
@@ -60,7 +59,7 @@ namespace ProjectEuler.Solutions
 			return result.Equals((int)result);
 		}
 
-		private static List<int> ReversedEratosthenesSieve(int upperbound)
+		private static IEnumerable<int> ReversedEratosthenesSieve(int upperbound)
 		{
 			List<int> nonPrimes = new List<int>(upperbound);
 
