@@ -19,16 +19,15 @@
 			return SumSquareDifference(100);
 		}
 
-		private static long SumSquareDifference(byte upperBound)
+		private static long SumSquareDifference(int upperBound)
 		{
 			double sumOfSquares = 0;
 			double squareOfSums = 0;
 
-			byte[] values = Problem005.GetArray(1, upperBound);
-			foreach (byte value in values)
+			for (int number = 1; number <= upperBound; number++)
 			{
-				sumOfSquares += Math.Pow(value, 2);
-				squareOfSums += value;
+				sumOfSquares += Math.Pow(number, 2);
+				squareOfSums += number;
 			}
 
 			squareOfSums = Math.Pow(squareOfSums, 2);

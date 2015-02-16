@@ -11,58 +11,14 @@
 	{
 		public override long Solution()
 		{
-			return GetSmallestNumberDividableByUpTo(20);
-		}
-
-		private static long GetSmallestNumberDividableByUpTo(byte largestDivisor)
-		{
-			long smallestNumber;
-
-			byte[] divisors = GetArray(1, largestDivisor);
-			for (long currentNumber = largestDivisor;; currentNumber += largestDivisor)
+			int number = 20;
+			while (number % 20 != 0 || number % 19 != 0 || number % 18 != 0 || number % 17 != 0 || number % 16 != 0 ||
+				number % 15 != 0 || number % 14 != 0 || number % 13 != 0 || number % 12 != 0 || number % 11 != 0)
 			{
-				if (AllDivisorsDividable(divisors, currentNumber))
-				{
-					smallestNumber = currentNumber;
-					break;
-				}
+				number += 20;
 			}
 
-			return smallestNumber;
-		}
-
-		private static bool AllDivisorsDividable(byte[] divisors, long currentNumber)
-		{
-			for(byte i = 0; i < divisors.Length; i++)
-			{
-				byte divisor = divisors[i];
-				if(!(currentNumber % divisor == 0))
-				{
-					return false;
-				}
-			}
-
-			return true;
-		}
-
-		public static byte[] GetArray(byte start, byte count)
-		{
-			byte[] divisors = new byte[count];
-			for(byte i = 0; i < count; i++)
-			{
-				divisors[i] = start;
-				start++;
-			}
-
-			return divisors;
-		}
-
-		[Test]
-		public void TestForExample()
-		{
-			long result = GetSmallestNumberDividableByUpTo(10);
-
-			Assert.AreEqual(2520, result);
+			return number;
 		}
 
 		[Test]
