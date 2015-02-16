@@ -1,5 +1,6 @@
 ﻿namespace ProjectEuler.Solutions
 {
+	using System;
 	using System.Collections.Generic;
 	using NUnit.Framework;
 
@@ -18,44 +19,64 @@
 	/// </summary>
 	public class Problem043 : Problem
 	{
-		private static readonly int[] divisors = new int[] { 2, 3, 5, 7, 11, 13, 17 };
+		private static readonly int[] divisors = new int[] { 17, 13, 11, 7, 5, 3, 2 };
 
 		public override long Solution()
 		{
 			long sum = 0;
-			List<string> permutations = new List<string>();
-			Problem024.Permutations("0123456789", permutations);
-			foreach (string permutation in permutations)
+
+			List<string> pandigitalNumbers = new List<string>();
+			char[] digits = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+			for (int i = 17; i < 1000; i += 17)
 			{
-				if (IsSubStringDivisable(permutation))
+				string number = i.ToString().PadLeft(3, '0');
+				if (number[0] != number[1] && number[1] != number[2] && number[0] != number[2])
 				{
-					sum += long.Parse(permutation);
+					char[] remainingDigits = RemoveUsedDigits(digits, number.ToCharArray());
+					AdvancePandigitalNumber(remainingDigits, pandigitalNumbers, number, 1);
 				}
 			}
 
+			foreach (string pandigitalNumber in pandigitalNumbers)
+			{
+				sum += long.Parse(pandigitalNumber);
+			}
+			
 			return sum;
 		}
 
-		private static bool IsSubStringDivisable(string numberString)
+		private static void AdvancePandigitalNumber(char[] digits, List<string> pandigitalNumbers, string numberString, int divisorIndex)
 		{
-			bool isSubStringDivisable = true;
-			for (int i = 0; i < 7; i++)
+			string firstTwoDigits = numberString.Substring(0, 2);
+			if (divisorIndex < 7)
 			{
-				long subNumber = long.Parse(numberString.Substring(i + 1, 3));
-				if (subNumber % divisors[i] != 0)
+				foreach (char digit in digits)
 				{
-					isSubStringDivisable = false;
-					break;
+					string newNumberString = digit + firstTwoDigits;
+					long newNumber = long.Parse(newNumberString);
+					if (newNumber % divisors[divisorIndex] == 0)
+					{
+						char[] remainingDigits = RemoveUsedDigits(digits, digit);
+						AdvancePandigitalNumber(remainingDigits, pandigitalNumbers, digit + numberString, divisorIndex + 1);
+					}
 				}
 			}
-
-			return isSubStringDivisable;
+			else
+			{
+				string pandigitalNumber = digits[0] + numberString;
+				pandigitalNumbers.Add(pandigitalNumber);
+			}
 		}
 
-		[Test]
-		public void TestForExample()
+		private static char[] RemoveUsedDigits(IEnumerable<char> digits, params char[] usedDigits)
 		{
-			Assert.IsTrue(IsSubStringDivisable("1406357289"));
+			List<char> remainingDigits = new List<char>(digits);
+			foreach (char usedDigit in usedDigits)
+			{
+				remainingDigits.Remove(usedDigit);
+			}
+
+			return remainingDigits.ToArray();
 		}
 
 		[Test]
