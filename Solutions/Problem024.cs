@@ -16,13 +16,20 @@
 	{
 		public override long Solution()
 		{
-			List<string> permutations = new List<string>();
-			Permutations("0123456789", permutations, 1000000);
+			List<string> permutations = Permutations("0123456789", 1000000);
 
 			return long.Parse(permutations[999999]);
 		}
 
-		public static void Permutations(string source, ICollection<string> permutations, int maxPermutations = int.MaxValue, string permutation = null)
+		public static List<string> Permutations(string source, int maxPermutations = int.MaxValue)
+		{
+			List<string> permutations = new List<string>();
+			Permutations(source, permutations, maxPermutations);
+
+			return permutations;
+		}
+
+		private static void Permutations(string source, ICollection<string> permutations, int maxPermutations = int.MaxValue, string permutation = null)
 		{
 			for(int i = 0; i < source.Length; i++)
 			{
