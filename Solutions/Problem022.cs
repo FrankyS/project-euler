@@ -2,6 +2,7 @@
 {
 	using System;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 	using ProjectEuler.Input;
 
 	/// <summary>
@@ -22,7 +23,7 @@
 			string[] names = SplitAndSortNames(Input.Problem022);
 			for (int i = 0; i < names.Length; i++)
 			{
-				long nameValue = GetStringValue(names[i]);
+				long nameValue = Numbers.GetStringValue(names[i]);
 				totalNameScore += nameValue * (i + 1);
 			}
 
@@ -42,21 +43,10 @@
 			return names;
 		}
 
-		public static int GetStringValue(string name)
-		{
-			int nameValue = 0;
-			foreach(char c in name)
-			{
-				nameValue += c - 64;
-			}
-
-			return nameValue;
-		}
-
 		[Test]
 		public void NameColinHasValueOf53() 
 		{
-			long value = GetStringValue("COLIN");
+			long value = Numbers.GetStringValue("COLIN");
 	
 			Assert.AreEqual(53, value);
 		}

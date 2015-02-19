@@ -2,6 +2,7 @@
 {
 	using System.Collections.Generic;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Highly divisible triangular number.
@@ -45,7 +46,7 @@
 
 		private static int GetAmountDivisors(long number)
 		{
-			IEnumerator<long> primeFactors = Problem003.GetPrimeFactors(number)
+			IEnumerator<long> primeFactors = Primes.GetPrimeFactors(number)
 				.GetEnumerator();
 
 			int amountDivisors = 0;

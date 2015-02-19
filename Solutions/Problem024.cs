@@ -2,6 +2,7 @@
 {
 	using System.Collections.Generic;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Lexicographic permutations.
@@ -16,39 +17,9 @@
 	{
 		public override long Solution()
 		{
-			List<string> permutations = Permutations("0123456789", 1000000);
+			List<string> permutations = Permutation.GetPermutations("0123456789", 1000000);
 
 			return long.Parse(permutations[999999]);
-		}
-
-		public static List<string> Permutations(string source, int maxPermutations = int.MaxValue)
-		{
-			List<string> permutations = new List<string>();
-			Permutations(source, permutations, maxPermutations);
-
-			return permutations;
-		}
-
-		private static void Permutations(string source, ICollection<string> permutations, int maxPermutations = int.MaxValue, string permutation = null)
-		{
-			for(int i = 0; i < source.Length; i++)
-			{
-				if (permutations.Count >= maxPermutations)
-				{
-					break;
-				}
-
-				string newPermutation = permutation + source[i];
-				string nextSource = source.Remove(i, 1);
-				if(nextSource.Length == 0)
-				{
-					permutations.Add(newPermutation);
-				}
-				else
-				{
-					Permutations(nextSource, permutations, maxPermutations, newPermutation);
-				}
-			}
 		}
 
 		[Test]
@@ -56,8 +27,7 @@
 		{
 			string[] expectedResult = new[] { "012", "021", "102", "120", "201", "210" };
 
-			List<string> permutations = new List<string>(6);
-			Permutations("012", permutations);
+			List<string> permutations = Permutation.GetPermutations("012");
 			
 			Assert.AreEqual(expectedResult, permutations);
 		}

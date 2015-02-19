@@ -1,6 +1,7 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Pandigital prime.
@@ -12,13 +13,13 @@
 		public override long Solution()
 		{
 			long largestPandigitalPrime = 0;
-			int[] primes = Problem010.EratosthenesSieve(7654321).ToArray();
+			int[] primes = Primes.EratosthenesSieve(7654321).ToArray();
 
 			for (int i = primes.Length - 1; i >= 0; i--)
 			{
 				long prime = primes[i];
 				string primeString = prime.ToString();
-				if (Problem032.IsPandigital(primeString, primeString.Length))
+				if (Numbers.IsPandigital(primeString, primeString.Length))
 				{
 					largestPandigitalPrime = prime;
 					break;
@@ -33,8 +34,8 @@
 		{
 			const int number = 2143;
 
-			Assert.IsTrue(Problem003.IsPrimeNumber(number));
-			Assert.IsTrue(Problem032.IsPandigital(number.ToString(), 4));
+			Assert.IsTrue(Primes.IsPrimeNumber(number));
+			Assert.IsTrue(Numbers.IsPandigital(number.ToString(), 4));
 		}
 
 		[Test]

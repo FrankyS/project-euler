@@ -1,6 +1,7 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Pandigital multiples.
@@ -24,7 +25,7 @@
 				for (int n = 2; n < 9; n++)
 				{
 					string products = ConcatenateProducts(number, n);
-					if (Problem032.IsPandigital(products))
+					if (Numbers.IsPandigital(products))
 					{
 						long pandigital = long.Parse(products);
 						if (pandigital > largestPandigital)
@@ -55,7 +56,7 @@
 			string product = ConcatenateProducts(192, 3);
 
 			Assert.AreEqual("192384576", product);
-			Assert.IsTrue(Problem032.IsPandigital(product));
+			Assert.IsTrue(Numbers.IsPandigital(product));
 		}
 
 		[Test]

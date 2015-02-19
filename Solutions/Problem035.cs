@@ -2,6 +2,7 @@
 {
 	using System.Collections.Generic;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Circular primes.
@@ -18,7 +19,7 @@
 
 		private static ICollection<int> GetCircularPrimes(int upperBound)
 		{
-			ICollection<int> primes = new HashSet<int>(Problem010.EratosthenesSieve(upperBound));
+			ICollection<int> primes = new HashSet<int>(Primes.EratosthenesSieve(upperBound));
 
 			ICollection<int> circularPrimes = new HashSet<int>();
 			foreach (int primeNumber in primes)

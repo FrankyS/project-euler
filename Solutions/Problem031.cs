@@ -50,7 +50,7 @@
 			return totalCombinations;
 		}
 
-		private string WriteCombination(List<int> coins)
+		private static string WriteCombination(List<int> coins)
 		{
 			List<string> resultParts = new List<string>();
 
@@ -82,10 +82,10 @@
 			List<List<int>> combinations = GetCombinations(coins, 5);
 
 			Assert.AreEqual(4, combinations.Count);
-			Assert.AreEqual("1 x 5", this.WriteCombination(combinations[0]));
-			Assert.AreEqual("2 x 2 + 1 x 1", this.WriteCombination(combinations[1]));
-			Assert.AreEqual("1 x 2 + 3 x 1", this.WriteCombination(combinations[2]));
-			Assert.AreEqual("5 x 1", this.WriteCombination(combinations[3]));
+			Assert.AreEqual("1 x 5", WriteCombination(combinations[0]));
+			Assert.AreEqual("2 x 2 + 1 x 1", WriteCombination(combinations[1]));
+			Assert.AreEqual("1 x 2 + 3 x 1", WriteCombination(combinations[2]));
+			Assert.AreEqual("5 x 1", WriteCombination(combinations[3]));
 		}
 
 		[Test]

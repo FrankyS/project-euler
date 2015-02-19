@@ -1,6 +1,7 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Quadratic primes.
@@ -33,7 +34,7 @@
 					{
 						value = GetValue(counter++, a, b);
 					} 
-					while(Problem003.IsPrimeNumber(value));
+					while(Primes.IsPrimeNumber(value));
 					counter--;
 
 					if(counter > amountConsecutiveValues)
@@ -57,10 +58,10 @@
 		{
 			for(int i = 0; i <= 39; i++)
 			{
-				Assert.IsTrue(Problem003.IsPrimeNumber(GetValue(i, 1, 41)));
+				Assert.IsTrue(Primes.IsPrimeNumber(GetValue(i, 1, 41)));
 			}
 
-			Assert.IsFalse(Problem003.IsPrimeNumber(GetValue(40, 1, 41)));
+			Assert.IsFalse(Primes.IsPrimeNumber(GetValue(40, 1, 41)));
 		}
 
 		[Test]

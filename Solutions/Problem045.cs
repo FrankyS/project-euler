@@ -1,6 +1,7 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Triangular, pentagonal, and hexagonal.
@@ -19,7 +20,7 @@
 			for (int i = 144;; i++)
 			{
 				long hexagonalNumber = GetHexagonalNumber(i);
-				if (Problem044.IsPentagonNumber(hexagonalNumber) && Problem042.IsTriangleNumber(hexagonalNumber))
+				if (Numbers.IsPentagonNumber(hexagonalNumber) && Numbers.IsTriangleNumber(hexagonalNumber))
 				{
 					number = hexagonalNumber;
 					break;
@@ -37,8 +38,8 @@
 		[Test]
 		public void TestForExample()
 		{
-			Assert.IsTrue(Problem042.IsTriangleNumber(40755));
-			Assert.IsTrue(Problem044.IsPentagonNumber(40755));
+			Assert.IsTrue(Numbers.IsTriangleNumber(40755));
+			Assert.IsTrue(Numbers.IsPentagonNumber(40755));
 			Assert.AreEqual(40755, GetHexagonalNumber(143));
 		}
 

@@ -2,6 +2,7 @@ namespace ProjectEuler.Solutions
 {
 	using System.Collections.Generic;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Distinct primes factors.
@@ -16,7 +17,7 @@ namespace ProjectEuler.Solutions
 	/// </summary>
 	public class Problem047 : Problem
 	{
-		private static readonly List<int> primeNumbers = Problem010.EratosthenesSieve(2000000);
+		private static readonly List<int> primeNumbers = Primes.EratosthenesSieve(2000000);
 
 		public override long Solution()
 		{

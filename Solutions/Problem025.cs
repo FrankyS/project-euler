@@ -2,6 +2,7 @@
 {
 	using System.Collections.Generic;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// 1000-digit Fibonacci number.
@@ -21,7 +22,7 @@
 		public override long Solution()
 		{
 			long counter = 1;
-			foreach (byte[] fibonacci in GetFibonacciAsArray())
+			foreach (byte[] fibonacci in ArrayMath.GetFibonacciAsArray())
 			{
 				counter++;
 				if(fibonacci.Length >= 1000)
@@ -33,29 +34,6 @@
 			return counter;
 		}
 
-		public static IEnumerable<byte[]> GetFibonacciAsArray()
-		{
-			byte[] first = new byte[] { 1 };
-			yield return first;
-
-			byte[] second = new byte[] { 2 };
-			yield return second;
-
-			while (true)
-			{
-				byte[] next = Problem013.Sum(first, second);
-				first = second;
-				second = next;
-
-				if (next.Length > int.MaxValue)
-				{
-					yield break;
-				}
-
-				yield return next;
-			}
-		}
-
 		[Test]
 		public void TestForExample()
 		{
@@ -63,7 +41,7 @@
 
 			int counter = 1;
 			byte[] digits = new byte[0];
-			foreach (byte[] fibonacci in GetFibonacciAsArray())
+			foreach (byte[] fibonacci in ArrayMath.GetFibonacciAsArray())
 			{
 				counter++;
 				if(counter == 12)

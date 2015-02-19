@@ -3,6 +3,7 @@ namespace ProjectEuler.Solutions
 	using System;
 	using System.Collections.Generic;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Pandigital products.
@@ -26,7 +27,7 @@ namespace ProjectEuler.Solutions
 				{
 					int product = multiplicand * multiplier;
 					string pandigitalProduct = string.Format("{0}{1}{2}", multiplicand, multiplier, product);
-					if(IsPandigital(pandigitalProduct))
+					if(Numbers.IsPandigital(pandigitalProduct))
 					{
 						pandigitalProducts.Add(product);
 					}
@@ -42,26 +43,6 @@ namespace ProjectEuler.Solutions
 			return sum;
 		}
 
-		public static bool IsPandigital(string pandigitalProduct, int n = 9, char startChar = '1')
-		{
-			bool isPandigital = pandigitalProduct.Length == n;
-			if (isPandigital)
-			{
-				char[] charArray = pandigitalProduct.ToCharArray();
-				Array.Sort(charArray);
-				for (int i = 0; i < charArray.Length; i++)
-				{
-					int expectedChar = startChar + i;
-					if (charArray[i] != expectedChar)
-					{
-						isPandigital = false;
-					}
-				}
-			}
-
-			return isPandigital;
-		}
-
 		[Test]
 		public void TestForExample()
 		{
@@ -70,7 +51,7 @@ namespace ProjectEuler.Solutions
 			const int product = multiplicand * multiplier;
 			string pandigitalProduct = string.Format("{0}{1}{2}", multiplicand, multiplier, product);
 
-			Assert.IsTrue(IsPandigital(pandigitalProduct));
+			Assert.IsTrue(Numbers.IsPandigital(pandigitalProduct));
 		}
 
 		[Test]

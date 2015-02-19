@@ -3,6 +3,7 @@
 	using System;
 	using System.Collections.Generic;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Truncatable primes.
@@ -16,7 +17,7 @@
 		public override long Solution()
 		{
 			List<long> truncatablePrimes = new List<long>();
-			foreach(long prime in Problem003.GetPrimeNumber())
+			foreach(long prime in Primes.GetPrimeNumber())
 			{
 				if(IsTruncatablePrime(prime))
 				{
@@ -53,7 +54,7 @@
 			{
 				leftPrime %= upperFactor;
 				rightPrime /= 10;
-				if(!Problem003.IsPrimeNumber(leftPrime) || !Problem003.IsPrimeNumber(rightPrime))
+				if(!Primes.IsPrimeNumber(leftPrime) || !Primes.IsPrimeNumber(rightPrime))
 				{
 					isTruncatable = false;
 					break;

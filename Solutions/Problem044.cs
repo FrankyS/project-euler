@@ -3,6 +3,7 @@
 	using System;
 	using System.Collections.Generic;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Pentagon numbers.
@@ -24,7 +25,7 @@
 				int pentagonNumber = GetPentagonNumber(i);
 				foreach (int number in pentagonNumbers)
 				{
-					if (pentagonNumbers.Contains(pentagonNumber - number) && IsPentagonNumber(pentagonNumber + number))
+					if (pentagonNumbers.Contains(pentagonNumber - number) && Numbers.IsPentagonNumber(pentagonNumber + number))
 					{
 						return pentagonNumber - number;
 					}
@@ -39,12 +40,6 @@
 			return n * ((3 * n) - 1) / 2;
 		}
 
-		public static bool IsPentagonNumber(long number)
-		{
-			double result = (Math.Sqrt((24 * number) + 1) + 1) / 6;
-			return result.Equals((int)result);
-		}
-
 		[TestCase(1)]
 		[TestCase(5)]
 		[TestCase(12)]
@@ -57,7 +52,7 @@
 		[TestCase(145)]
 		public void TestForPentagonNumber(int number)
 		{
-			Assert.IsTrue(IsPentagonNumber(number));
+			Assert.IsTrue(Numbers.IsPentagonNumber(number));
 		}
 
 		[Test]

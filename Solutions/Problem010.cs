@@ -1,8 +1,7 @@
 ﻿namespace ProjectEuler.Solutions
 {
-	using System.Collections;
-	using System.Collections.Generic;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Summation of primes.
@@ -19,39 +18,12 @@
 		private static long SumOfPrimes(int upperBound)
 		{
 			long sum = 0;
-			foreach(int primeNumber in EratosthenesSieve(upperBound))
+			foreach(int primeNumber in Primes.EratosthenesSieve(upperBound))
 			{
 				sum += primeNumber;
 			}
 
 			return sum;
-		}
-
-		public static List<int> EratosthenesSieve(int upperbound)
-		{
-			List<int> primes = new List<int>(upperbound);
-
-			BitArray bitArray = new BitArray(upperbound + 1, true);
-			for (int i = 2; i * i < upperbound; i++)
-			{
-				if (bitArray.Get(i))
-				{
-					for (int j = i * i; j < upperbound; j += i)
-					{
-						bitArray.Set(j, false);
-					}
-				}
-			}
-
-			for (int i = 2; i < upperbound; i++)
-			{
-				if (bitArray.Get(i))
-				{
-					primes.Add(i);
-				}
-			}
-
-			return primes;
 		}
 
 		[Test]

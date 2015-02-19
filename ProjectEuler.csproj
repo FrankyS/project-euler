@@ -38,6 +38,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\Timings.cs" />
+    <Compile Include="Helper\ArrayMath.cs" />
+    <Compile Include="Helper\Numbers.cs" />
+    <Compile Include="Helper\Permutation.cs" />
+    <Compile Include="Helper\Primes.cs" />
     <Compile Include="Input\Input.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -124,6 +128,7 @@
   <ItemGroup>
     <None Include="Resources\Problem042.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

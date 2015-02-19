@@ -2,6 +2,7 @@
 {
 	using System;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 	using ProjectEuler.Input;
 
 	/// <summary>
@@ -25,8 +26,8 @@
 
 			foreach (string word in words)
 			{
-				long value = Problem022.GetStringValue(word);
-				if (IsTriangleNumber(value))
+				long value = Numbers.GetStringValue(word);
+				if (Numbers.IsTriangleNumber(value))
 				{
 					count++;
 				}
@@ -35,17 +36,11 @@
 			return count;
 		}
 
-		public static bool IsTriangleNumber(long number)
-		{
-			double result = (Math.Sqrt((8 * number) + 1) - 1) / 2;
-			return result.Equals((int)result);
-		}
-
 		[Test]
 		public void TestForExample()
 		{
-			Assert.AreEqual(55, Problem022.GetStringValue("SKY"));
-			Assert.IsTrue(IsTriangleNumber(55));
+			Assert.AreEqual(55, Numbers.GetStringValue("SKY"));
+			Assert.IsTrue(Numbers.IsTriangleNumber(55));
 		}
 
 		[Test]

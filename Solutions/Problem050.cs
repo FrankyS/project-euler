@@ -2,6 +2,7 @@
 {
 	using System.Collections.Generic;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Consecutive prime sum.
@@ -18,7 +19,7 @@
 			int result = 0;
 
 			int longestCount = 0;
-			List<int> primes = Problem010.EratosthenesSieve(1000000);
+			List<int> primes = Primes.EratosthenesSieve(1000000);
 			foreach (int prime in primes)
 			{
 				int count = CountOfSumOfPrimes(prime, primes);

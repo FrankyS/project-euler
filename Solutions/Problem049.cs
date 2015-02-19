@@ -3,6 +3,7 @@
 	using System;
 	using System.Collections.Generic;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Prime permutations.
@@ -18,7 +19,7 @@
 		{
 			string result = string.Empty;
 
-			HashSet<int> primes = new HashSet<int>(Problem010.EratosthenesSieve(10000));
+			HashSet<int> primes = new HashSet<int>(Primes.EratosthenesSieve(10000));
 			foreach (int prime in primes)
 			{
 				if (prime < 1000)
@@ -26,7 +27,7 @@
 					continue;
 				}
 
-				List<string> permutations = Problem024.Permutations(prime.ToString());
+				List<string> permutations = Permutation.GetPermutations(prime.ToString());
 
 				HashSet<int> permutedPrimes = new HashSet<int>();
 				foreach (string permutation in permutations)

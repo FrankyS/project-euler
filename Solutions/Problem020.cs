@@ -1,6 +1,7 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Factorial digit sum.
@@ -30,7 +31,7 @@
 			byte[] factorial = { 1 };
 			for (int i = 1; i <= number; i++)
 			{
-				factorial = Multiply(factorial, Problem008.ToDigitsArray(i.ToString()));
+				factorial = Multiply(factorial, ArrayMath.ToDigitsArray(i.ToString()));
 			}
 
 			return factorial;
@@ -54,7 +55,7 @@
 						tmpResult[targetIndex] = (byte)(value % 10);
 					}
 
-					result = Problem013.Sum(result, tmpResult);
+					result = ArrayMath.Sum(result, tmpResult);
 				}
 			}
 
@@ -78,7 +79,7 @@
 		[TestCase("15", "3", "45")]
 		public void TestForMultiply(string first, string second, string expectedResult)
 		{
-			byte[] result = Multiply(Problem008.ToDigitsArray(first), Problem008.ToDigitsArray(second));
+			byte[] result = Multiply(ArrayMath.ToDigitsArray(first), ArrayMath.ToDigitsArray(second));
 
 			Assert.AreEqual(expectedResult, string.Join(string.Empty, result));
 		}

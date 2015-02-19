@@ -4,6 +4,7 @@ namespace ProjectEuler.Solutions
 	using System.Collections;
 	using System.Collections.Generic;
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 
 	/// <summary>
 	/// Goldbach's other conjecture.
@@ -24,7 +25,7 @@ namespace ProjectEuler.Solutions
 			long number = 0;
 
 			const int upperbound = 200000;
-			List<int> primes = Problem010.EratosthenesSieve(upperbound);
+			List<int> primes = Primes.EratosthenesSieve(upperbound);
 			foreach (int nonPrime in ReversedEratosthenesSieve(upperbound))
 			{
 				if (number > 0)

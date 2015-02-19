@@ -1,6 +1,7 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using NUnit.Framework;
+	using ProjectEuler.Helper;
 	using ProjectEuler.Input;
 
 	/// <summary>
@@ -21,7 +22,7 @@
 			long largestProduct = 0;
 
 			string giantNumber = Input.Problem008;
-			byte[] digits = ToDigitsArray(giantNumber);
+			byte[] digits = ArrayMath.ToDigitsArray(giantNumber);
 
 			for (int i = 0; i < digits.Length - 1 - amountAdjacent; i++)
 			{
@@ -38,17 +39,6 @@
 			}
 
 			return largestProduct;
-		}
-
-		public static byte[] ToDigitsArray(string numberString)
-		{
-			byte[] digits = new byte[numberString.Length];
-			for(int i = 0; i < numberString.Length; i++)
-			{
-				digits[i] = byte.Parse(numberString[i].ToString());
-			}
-
-			return digits;
 		}
 
 		[Test]
