@@ -22,7 +22,7 @@
 			long largestProduct = 0;
 
 			string giantNumber = Input.Problem008;
-			byte[] digits = ArrayMath.ToDigitsArray(giantNumber);
+			int[] digits = ArrayMath.ToDigitsArray(giantNumber);
 
 			for (int i = 0; i < digits.Length - 1 - amountAdjacent; i++)
 			{

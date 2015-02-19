@@ -22,7 +22,7 @@
 		public override long Solution()
 		{
 			long counter = 1;
-			foreach (byte[] fibonacci in ArrayMath.GetFibonacciAsArray())
+			foreach (int[] fibonacci in ArrayMath.GetFibonacciAsArray())
 			{
 				counter++;
 				if(fibonacci.Length >= 1000)
@@ -37,11 +37,11 @@
 		[Test]
 		public void TestForExample()
 		{
-			byte[] expectedDigits = new byte[] { 1, 4, 4 };
+			int[] expectedDigits = new int[] { 1, 4, 4 };
 
 			int counter = 1;
-			byte[] digits = new byte[0];
-			foreach (byte[] fibonacci in ArrayMath.GetFibonacciAsArray())
+			int[] digits = new int[0];
+			foreach (int[] fibonacci in ArrayMath.GetFibonacciAsArray())
 			{
 				counter++;
 				if(counter == 12)

@@ -16,7 +16,7 @@
 	{
 		public override long Solution()
 		{
-			byte[] factorial = Factorial(100);
+			int[] factorial = Factorial(100);
 			long sum = 0;
 			foreach(byte digit in factorial)
 			{
@@ -26,9 +26,9 @@
 			return sum;
 		}
 
-		private static byte[] Factorial(int number)
+		private static int[] Factorial(int number)
 		{
-			byte[] factorial = { 1 };
+			int[] factorial = { 1 };
 			for (int i = 1; i <= number; i++)
 			{
 				factorial = Multiply(factorial, ArrayMath.ToDigitsArray(i.ToString()));
@@ -37,22 +37,22 @@
 			return factorial;
 		}
 
-		private static byte[] Multiply(byte[] first, byte[] second)
+		private static int[] Multiply(int[] first, int[] second)
 		{
 			int count = first.Length + second.Length;
-			byte[] result = new byte[0];
+			int[] result = new int[0];
 			for (int f = first.Length - 1; f >= 0; f--)
 			{
 				for (int s = second.Length - 1; s >= 0; s--)
 				{
-					byte[] tmpResult = new byte[count];
+					int[] tmpResult = new int[count];
 					int targetIndex = (f + s) + 1;
 					int value = first[f] * second[s];
-					tmpResult[targetIndex] = (byte)(value % 10);
+					tmpResult[targetIndex] = value % 10;
 					while ((value /= 10) > 0)
 					{
 						targetIndex--;
-						tmpResult[targetIndex] = (byte)(value % 10);
+						tmpResult[targetIndex] = value % 10;
 					}
 
 					result = ArrayMath.Sum(result, tmpResult);
@@ -65,7 +65,7 @@
 				startIndex++;
 			}
 
-			byte[] cleanedResult = new byte[result.Length - startIndex];
+			int[] cleanedResult = new int[result.Length - startIndex];
 			for(int i = 0; i < cleanedResult.Length; i++)
 			{
 				cleanedResult[i] = result[i + startIndex];
@@ -79,7 +79,7 @@
 		[TestCase("15", "3", "45")]
 		public void TestForMultiply(string first, string second, string expectedResult)
 		{
-			byte[] result = Multiply(ArrayMath.ToDigitsArray(first), ArrayMath.ToDigitsArray(second));
+			int[] result = Multiply(ArrayMath.ToDigitsArray(first), ArrayMath.ToDigitsArray(second));
 
 			Assert.AreEqual(expectedResult, string.Join(string.Empty, result));
 		}
@@ -87,8 +87,8 @@
 		[Test]
 		public void TestForExample()
 		{
-			byte[] expectedFactorial = new byte[] { 3, 6, 2, 8, 8, 0, 0 };
-			byte[] factorial = Factorial(10);
+			int[] expectedFactorial = new int[] { 3, 6, 2, 8, 8, 0, 0 };
+			int[] factorial = Factorial(10);
 
 			Assert.AreEqual(expectedFactorial, factorial);
 		}

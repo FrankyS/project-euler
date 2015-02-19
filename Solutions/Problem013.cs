@@ -17,13 +17,13 @@
 		{
 			string[] rows = Input.Problem013.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
-			byte[][] numbers = new byte[rows.Length][];
+			int[][] numbers = new int[rows.Length][];
 			for(int i = 0; i < rows.Length; i++)
 			{
 				numbers[i] = ArrayMath.ToDigitsArray(rows[i]);
 			}
 
-			byte[] result = ArrayMath.Sum(numbers);
+			int[] result = ArrayMath.Sum(numbers);
 			string stringResult = string.Empty;
 			for(int i = 0; i < 10; i++)
 			{
@@ -38,7 +38,7 @@
 		[TestCase("14", "2", "16")]
 		public void TestForSum(string first, string second, string expectedResult)
 		{
-			byte[] result = ArrayMath.Sum(ArrayMath.ToDigitsArray(first), ArrayMath.ToDigitsArray(second));
+			int[] result = ArrayMath.Sum(ArrayMath.ToDigitsArray(first), ArrayMath.ToDigitsArray(second));
 
 			Assert.AreEqual(expectedResult, string.Join(string.Empty, result));
 		}
