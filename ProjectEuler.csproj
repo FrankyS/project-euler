@@ -35,6 +35,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\Timings.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Solutions\Problem050.cs" />
     <Compile Include="Solutions\Problem051.cs" />
     <Compile Include="Solutions\Problem052.cs" />
+    <Compile Include="Solutions\Problem053.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
