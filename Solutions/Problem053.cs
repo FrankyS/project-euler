@@ -52,7 +52,7 @@
 		[Test]
 		public void TestForProblem()
 		{
-			Assert.AreEqual(-1, this.Solution());
+			Assert.AreEqual(4075, this.Solution());
 		}
 	}
 }
