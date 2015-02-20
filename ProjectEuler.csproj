@@ -103,6 +103,7 @@
     <Compile Include="Solutions\Problem051.cs" />
     <Compile Include="Solutions\Problem052.cs" />
     <Compile Include="Solutions\Problem053.cs" />
+    <Compile Include="Solutions\Problem054.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -133,6 +134,7 @@
     <None Include="Resources\Problem042.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Problem054.txt" />
     <Content Include="Resources\RecoveryKey.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
