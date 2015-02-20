@@ -57,10 +57,10 @@
 
 		public static IEnumerable<int[]> GetFibonacciAsArray()
 		{
-			int[] first = new int[] { 1 };
+			int[] first = new[] { 1 };
 			yield return first;
 
-			int[] second = new int[] { 2 };
+			int[] second = new[] { 2 };
 			yield return second;
 
 			while (true)
@@ -78,17 +78,52 @@
 			}
 		}
 
-		public static int ToNumber(int[] digits)
+		public static int[] Factorial(int number)
 		{
-			int number = 0;
-			int factor = 1;
-			for (int i = digits.Length - 1; i >= 0; i--)
+			int[] factorial = { 1 };
+			for (int i = 1; i <= number; i++)
 			{
-				number += digits[i] * factor;
-				factor *= 10;
+				factorial = Multiply(factorial, ToDigitsArray(i.ToString()));
 			}
 
-			return number;
+			return factorial;
+		}
+
+		public static int[] Multiply(int[] first, int[] second)
+		{
+			int count = first.Length + second.Length;
+			int[] result = new int[0];
+			for (int f = first.Length - 1; f >= 0; f--)
+			{
+				for (int s = second.Length - 1; s >= 0; s--)
+				{
+					int[] tmpResult = new int[count];
+					int targetIndex = (f + s) + 1;
+					int value = first[f] * second[s];
+					tmpResult[targetIndex] = value % 10;
+					while ((value /= 10) > 0)
+					{
+						targetIndex--;
+						tmpResult[targetIndex] = value % 10;
+					}
+
+					result = Sum(result, tmpResult);
+				}
+			}
+
+			int startIndex = 0;
+			while(result[startIndex] == 0)
+			{
+				startIndex++;
+			}
+
+			int[] cleanedResult = new int[result.Length - startIndex];
+			for(int i = 0; i < cleanedResult.Length; i++)
+			{
+				cleanedResult[i] = result[i + startIndex];
+			}
+
+			return cleanedResult;
 		}
 	}
 }

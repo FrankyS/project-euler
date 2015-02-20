@@ -1,7 +1,6 @@
 ﻿namespace ProjectEuler.Solutions
 {
 	using System;
-	using System.Collections.Generic;
 	using NUnit.Framework;
 	using ProjectEuler.Helper;
 	using ProjectEuler.Input;

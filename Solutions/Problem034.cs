@@ -45,10 +45,10 @@
 			return sum;
 		}
 
-		private static long Factorial(int digit)
+		private static long Factorial(int number)
 		{
 			long factorial = 1;
-			for(int i = 1; i <= digit; i++)
+			for(int i = 1; i <= number; i++)
 			{
 				factorial *= i;
 			}
