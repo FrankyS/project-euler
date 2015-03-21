@@ -1,6 +1,5 @@
 ﻿namespace ProjectEuler.Helper
 {
-	using System;
 	using System.Collections.Generic;
 
 	public static class Permutation
