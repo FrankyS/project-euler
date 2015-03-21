@@ -107,6 +107,7 @@
     <Compile Include="Solutions\Problem055.cs" />
     <Compile Include="Solutions\Problem056.cs" />
     <Compile Include="Solutions\Problem057.cs" />
+    <Compile Include="Solutions\Problem058.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
