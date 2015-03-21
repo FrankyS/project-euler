@@ -1,6 +1,7 @@
 ﻿namespace ProjectEuler.Helper
 {
 	using System;
+	using System.Numerics;
 
 	public static class Numbers
 	{
@@ -22,6 +23,18 @@
 			}
 
 			return isPandigital;
+		}
+
+		public static long Length(this BigInteger number)
+		{
+			long length = 0;
+			do
+			{
+				number /= 10;
+				length++;
+			} while (number > 0);
+
+			return length;
 		}
 
 		public static bool IsTriangleNumber(long number)
